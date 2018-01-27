@@ -12,33 +12,42 @@ public class Soundwave : MonoBehaviour
     public float radius = 25;
 
     public AnimationCurve influencerate;
-	 float lifetime = 0.0F;
+    float lifetime = 0.0F;
 
     // Use this for initialization
     void Start()
-    {           
-		GenerateLinePoints(30);
+    {
+        GenerateLinePoints(30);
     }
 
+    float wavesize = 0.6F;
+    float speed = 10;
+    float intensity = 1.5F;
     // Update is called once per frame
     void Update()
     {
-		if(lifetime > 1.0F) return;
-			lifetime += Time.deltaTime;
-            if (linepoints != null && linepoints.Count > 0)
+        if (lifetime > 1.0F) return;
+        lifetime += Time.deltaTime;
+        if (linepoints != null && linepoints.Count > 0)
+        {
+            for (int i = 0; i < linepoints.Count; i++)
             {
-                for (int i = 0; i < linepoints.Count; i += 2)
-                {
-                    linepoints[i].rate = Mathf.PingPong(Time.time * 10, 1.0F);
-                    linepoints[i].velocity = Vector3.Lerp(linepoints[i].vel_min, linepoints[i].vel_max, linepoints[i].rate);
-                    linepoints[i].currentpoint = linepoints[i].initialpoint + (linepoints[i].velocity * influencerate.Evaluate(lifetime));
-                    foreach (Transform t in linepoints[i].transform)
-                    {
-                        t.position = linepoints[i].currentpoint;
-                    }
+                CalculateWaveBounce(linepoints[i], i);
 
-                }
-			}
+            }
+        }
+    }
+
+    void CalculateWaveBounce(WavePoint p, int i)
+    {
+        float size_ratio = Mathf.Cos(i+Time.time) * wavesize;//(i % wavesize) / (float)wavesize;
+        p.rate = Mathf.PingPong(Time.time * speed, 1.0F);
+        p.velocity = Vector3.Lerp(p.vel_min, p.vel_max, p.rate);
+        p.currentpoint = p.initialpoint + (p.velocity * influencerate.Evaluate(lifetime) * size_ratio);
+        foreach (Transform t in p.transform)
+        {
+            t.position = p.currentpoint;
+        }
     }
 
     public void GenerateLinePoints(int num)
@@ -47,7 +56,7 @@ public class Soundwave : MonoBehaviour
         {
             for (int i = 0; i < linepoints.Count; i++)
             {
-				if(linepoints[i] == null || linepoints[i].transform == null) continue;
+                if (linepoints[i] == null || linepoints[i].transform == null) continue;
                 for (int t = 0; t < linepoints[i].transform.Count; i++)
                 {
                     GameObject.Destroy(linepoints[i].transform[t].gameObject);
@@ -57,7 +66,7 @@ public class Soundwave : MonoBehaviour
             linepoints.Clear();
         }
         linepoints = new List<WavePoint>();
-        for (int i = 0; i <= num; i++)
+        for (int i = 0; i < num; i++)
         {
             GameObject linepoint = Instantiate(LinePointPrefab);
             linepoint.name = "Line point " + i;
@@ -69,7 +78,7 @@ public class Soundwave : MonoBehaviour
 
             Vector3 velc = linepoint.transform.position - this.transform.position;
             velc /= 10;
-            WavePoint c = new WavePoint(linepoint.transform, velc, -velc);
+            WavePoint c = new WavePoint(linepoint.transform, velc * intensity, -velc * intensity);
             linepoints.Add(c);
         }
         GameObject linepointfinal = Instantiate(LinePointPrefab);
