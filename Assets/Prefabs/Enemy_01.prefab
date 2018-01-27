@@ -38,6 +38,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4180884069044158}
   - component: {fileID: 212939984476102236}
+  - component: {fileID: 95833718985488498}
   m_Layer: 0
   m_Name: 27292181_2134424983239264_263979307_n
   m_TagString: Untagged
@@ -87,6 +88,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!95 &95833718985488498
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1816790555179418}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 760e180d61bbd7f45ab4b5c8c2637f96, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114661398419177224
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -100,7 +118,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyExplosionPrefab: {fileID: 1585895199412138, guid: a34e14c57235c4f45b379eba0289fa94,
     type: 2}
-  speed: 0.1
   renderer: {fileID: 212939984476102236}
   colour: 0
 --- !u!135 &135700888685328242

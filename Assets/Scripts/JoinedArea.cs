@@ -34,9 +34,7 @@ public class JoinedArea : MonoBehaviour
             float d2 = (other.transform.position - pos2).sqrMagnitude;
 
             Enemy enemy = other.GetComponent<Enemy>();
-            float radiusSquared = GameUtil.ExplosionRadiusSquared - (enemy.radius * enemy.radius);
-
-            if (d1 <= radiusSquared && d2 <= radiusSquared)
+            if (d1 <= GameUtil.ExplosionRadiusSquared && d2 <= GameUtil.ExplosionRadiusSquared)
             {
                 if (enemy.colour == colour)
                 {

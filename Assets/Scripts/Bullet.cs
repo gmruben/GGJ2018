@@ -46,7 +46,6 @@ public class Bullet : MonoBehaviour
 
     public void Explode ()
     {
-        Debug.Log("EXPLODE");
         Explosion explosion = GameObject.Instantiate(explosionPrefab).GetComponent<Explosion> ();
         explosion.Init (id, colour);
 
