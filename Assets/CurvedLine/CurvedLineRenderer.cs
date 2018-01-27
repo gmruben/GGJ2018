@@ -13,7 +13,7 @@ public class CurvedLineRenderer : MonoBehaviour
 	public float gizmoSize = 0.1f;
 	public Color gizmoColor = new Color(1,0,0,0.5f);
 	//PRIVATE
-	private CurvedLinePoint[] linePoints = new CurvedLinePoint[0];
+	public CurvedLinePoint[] linePoints = new CurvedLinePoint[0];
 	private Vector3[] linePositions = new Vector3[0];
 	private Vector3[] linePositionsOld = new Vector3[0];
 

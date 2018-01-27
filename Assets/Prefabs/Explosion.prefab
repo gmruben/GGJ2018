@@ -151,6 +151,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  generate_on_init: 1
 --- !u!114 &114757508013484668
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -191,6 +192,7 @@ MonoBehaviour:
     m_RotationOrder: 0
   LinePointPrefab: {fileID: 1051381785081580, guid: ae18120a01ba8a74199fd5f752f79b4e,
     type: 2}
+  LinePrefab: {fileID: 1817448276568470, guid: d2a4a79ec3aae644586b538700289097, type: 2}
   influencerate:
     serializedVersion: 2
     m_Curve: []
@@ -208,11 +210,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f886d860c5994de44bda0d51d3182bee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineSegmentSize: 0.3
+  lineSegmentSize: 0.2
   lineWidth: 0.025
   showGizmos: 1
   gizmoSize: 0.2
   gizmoColor: {r: 0, g: 1, b: 0.006896496, a: 0.5}
+  linePoints: []
   line: {fileID: 120184806237965730}
 --- !u!120 &120184806237965730
 LineRenderer:
