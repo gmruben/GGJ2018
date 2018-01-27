@@ -29,13 +29,14 @@ public class Explosion : MonoBehaviour
     public GameObject LinePointPrefab;
     
     public AnimationCurve influencerate;
-	 float lifetime = 0.0F;
+	private float lifetime = 0.0F;
 
     public void Init(PlayerId id, WaveColour colour)
     {
         this.id = id;
         this.colour = colour;
-        this.counter = 0.0F;
+
+        counter = 0.0F;
 
         color_init = GameUtil.GetColor(colour);
         color_halfalpha = color_init;
@@ -83,9 +84,9 @@ public class Explosion : MonoBehaviour
         else if (other.tag == "Bullet")
         {
             Bullet otherBullet = other.GetComponent<Bullet>();
-            if (otherBullet.id != id)
+            if (true) //otherBullet.id != id)
             {
-                other.GetComponent<Bullet>().Kill();
+                other.GetComponent<Bullet>().Desintegrate();
             }
         }
     }

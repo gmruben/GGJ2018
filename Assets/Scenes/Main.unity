@@ -228,7 +228,6 @@ GameObject:
   - component: {fileID: 883225328}
   - component: {fileID: 883225327}
   - component: {fileID: 883225326}
-  - component: {fileID: 883225325}
   m_Layer: 0
   m_Name: UICamera
   m_TagString: Untagged
@@ -236,13 +235,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &883225325
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 883225324}
-  m_Enabled: 1
 --- !u!92 &883225326
 Behaviour:
   m_ObjectHideFlags: 0
@@ -313,11 +305,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114102542646957272, guid: bd26945b6e905fd44adf0bc6c7359460,
-        type: 2}
-      propertyPath: colours.Array.size
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 4206776346891856, guid: bd26945b6e905fd44adf0bc6c7359460, type: 2}
       propertyPath: m_LocalPosition.x
       value: 8
@@ -354,86 +341,9 @@ Prefab:
       propertyPath: m_Name
       value: PlayerRight
       objectReference: {fileID: 0}
-    - target: {fileID: 114102542646957272, guid: bd26945b6e905fd44adf0bc6c7359460,
-        type: 2}
-      propertyPath: fire
-      value: 107
-      objectReference: {fileID: 0}
-    - target: {fileID: 114102542646957272, guid: bd26945b6e905fd44adf0bc6c7359460,
-        type: 2}
-      propertyPath: up
-      value: 111
-      objectReference: {fileID: 0}
-    - target: {fileID: 114102542646957272, guid: bd26945b6e905fd44adf0bc6c7359460,
-        type: 2}
-      propertyPath: down
-      value: 108
-      objectReference: {fileID: 0}
-    - target: {fileID: 114102542646957272, guid: bd26945b6e905fd44adf0bc6c7359460,
-        type: 2}
-      propertyPath: angularSpeed
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 114102542646957272, guid: bd26945b6e905fd44adf0bc6c7359460,
-        type: 2}
-      propertyPath: bulletPrefab
-      value: 
-      objectReference: {fileID: 1624319413451382, guid: 2887303337b0f8247a5e3a85c4d3f007,
-        type: 2}
-    - target: {fileID: 114102542646957272, guid: bd26945b6e905fd44adf0bc6c7359460,
-        type: 2}
-      propertyPath: id
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114102542646957272, guid: bd26945b6e905fd44adf0bc6c7359460,
-        type: 2}
-      propertyPath: colours.Array.data[1]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114102542646957272, guid: bd26945b6e905fd44adf0bc6c7359460,
-        type: 2}
-      propertyPath: colours.Array.data[2]
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114102542646957272, guid: bd26945b6e905fd44adf0bc6c7359460,
-        type: 2}
-      propertyPath: colour
-      value: 105
-      objectReference: {fileID: 0}
-    - target: {fileID: 114102542646957272, guid: bd26945b6e905fd44adf0bc6c7359460,
-        type: 2}
-      propertyPath: renderer
-      value: 
-      objectReference: {fileID: 2003654446}
-    - target: {fileID: 23175728846724868, guid: bd26945b6e905fd44adf0bc6c7359460,
-        type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 7d82976e6b2f80b40840d1c178462b3d, type: 2}
-    - target: {fileID: 114102542646957272, guid: bd26945b6e905fd44adf0bc6c7359460,
-        type: 2}
-      propertyPath: JoyFireButton
-      value: Fire2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114102542646957272, guid: bd26945b6e905fd44adf0bc6c7359460,
-        type: 2}
-      propertyPath: JoyL
-      value: LB2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114102542646957272, guid: bd26945b6e905fd44adf0bc6c7359460,
-        type: 2}
-      propertyPath: JoyR
-      value: RB2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114102542646957272, guid: bd26945b6e905fd44adf0bc6c7359460,
-        type: 2}
-      propertyPath: JoyFire
-      value: Fire2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114102542646957272, guid: bd26945b6e905fd44adf0bc6c7359460,
-        type: 2}
-      propertyPath: JoyChangeColour
-      value: ChangeColour2
+    - target: {fileID: 1857652597689774, guid: bd26945b6e905fd44adf0bc6c7359460, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bd26945b6e905fd44adf0bc6c7359460, type: 2}
@@ -562,6 +472,10 @@ Prefab:
       propertyPath: JoyChangeColour
       value: ChangeColour1
       objectReference: {fileID: 0}
+    - target: {fileID: 1857652597689774, guid: bd26945b6e905fd44adf0bc6c7359460, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bd26945b6e905fd44adf0bc6c7359460, type: 2}
   m_IsPrefabParent: 0
@@ -672,6 +586,17 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 883225328}
+    - target: {fileID: 114733767925878316, guid: 1c6cd5b53a6a01c4f8f71b43f1463685,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 3693f79ea2143444ab6dd5a0fdcb6465,
+        type: 3}
+    - target: {fileID: 114733767925878316, guid: 1c6cd5b53a6a01c4f8f71b43f1463685,
+        type: 2}
+      propertyPath: m_FontData.m_FontStyle
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1c6cd5b53a6a01c4f8f71b43f1463685, type: 2}
   m_IsPrefabParent: 0
@@ -789,11 +714,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &2003654446 stripped
-MeshRenderer:
-  m_PrefabParentObject: {fileID: 23175728846724868, guid: bd26945b6e905fd44adf0bc6c7359460,
-    type: 2}
-  m_PrefabInternal: {fileID: 1008326837}
 --- !u!114 &2023926895 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114675082943900370, guid: dbcd0ab1e0109ec4497ea3fe43b2494d,

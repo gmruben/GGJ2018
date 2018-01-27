@@ -13,7 +13,15 @@ public class Bullet : MonoBehaviour
     public Vector3 direction;
     public MeshRenderer renderer;
     public TrailRenderer[] trailRenderers;
-    
+
+    public ParticleSystemRenderer destroyParticleSystem;
+    public Collider collider;
+
+    void Awake ()
+    {
+        destroyParticleSystem.gameObject.SetActive(false);
+    }
+
     public void Init(PlayerId id, WaveColour colour, Vector3 direction)
     {
         this.id = id;
@@ -28,7 +36,10 @@ public class Bullet : MonoBehaviour
             trailRenderers[i].startColor = c;
             trailRenderers[i].endColor = new Color(c.r, c.g, c.b, 0.25f);
         }
-        
+
+        destroyParticleSystem.material.SetColor("_Color", GameUtil.GetColor(colour));
+        destroyParticleSystem.material.SetColor("_TintColor", GameUtil.GetColor(colour));
+
         transform.rotation = Quaternion.FromToRotation (Vector3.up, direction);
     }
 
@@ -47,9 +58,28 @@ public class Bullet : MonoBehaviour
         GameObject.Destroy(gameObject);
     }
 
+    public void Desintegrate ()
+    {
+        renderer.gameObject.SetActive (false);
+        for (int i = 0; i < trailRenderers.Length; i++)
+        {
+            trailRenderers[i].gameObject.SetActive (false);
+        }
+
+        destroyParticleSystem.gameObject.SetActive(true);
+        collider.enabled = false;
+
+        StartCoroutine(DestroyCoroutine(2.0f));
+    }
+
     void Update()
     {
         transform.position += direction * speed * Time.deltaTime;
     }
     
+    private IEnumerator DestroyCoroutine (float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        GameObject.Destroy(gameObject);
+    }
 }

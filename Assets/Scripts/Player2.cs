@@ -22,6 +22,7 @@ public class Player2 : MonoBehaviour
     public WaveColour[] colours;
     public int currentColourIndex;
     public MeshRenderer renderer;
+    public SpriteRenderer line;
 
     private Bullet currentBullet;
 
@@ -80,5 +81,6 @@ public class Player2 : MonoBehaviour
     private void UpdateColour ()
     {
         renderer.material.SetColor("_Color", GameUtil.GetColor(CurrentColour));
+        line.color = GameUtil.GetColor(CurrentColour);
     }
 }
