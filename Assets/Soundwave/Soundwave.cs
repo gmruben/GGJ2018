@@ -1,26 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
 
-public class Explosion : MonoBehaviour
+public class Soundwave : MonoBehaviour
 {
-    public event Action OnDead;
-
-    public float maxScale;
-    public float explosionTime;
-
-    public SpriteRenderer renderer;
-
-    public GameObject joinedAreaPrefab;
-
-    private float counter;
-
-    public TowerId id;
-    public WaveColour colour;
-
-    public bool hasCollided;
-
     public CurvedLineRenderer linerenderer;
 
     public GameObject LinePointPrefab;
@@ -31,60 +14,32 @@ public class Explosion : MonoBehaviour
     public AnimationCurve influencerate;
 	 float lifetime = 0.0F;
 
-    public void Init(TowerId id, WaveColour colour)
-    {
-        this.id = id;
-        this.colour = colour;
-
-        Color c = GameUtil.GetColor(colour);
-        renderer.color = new Color(c.r, c.g, c.b, 0.5f);
-
-        transform.localScale = Vector3.one * GameUtil.explosionRadius * 2;
-         GenerateLinePoints(30);
-
-        linerenderer.line.SetColors(c, c);
+    // Use this for initialization
+    void Start()
+    {           
+		GenerateLinePoints(30);
     }
 
-	void Update ()
+    // Update is called once per frame
+    void Update()
     {
-        counter += Time.deltaTime;
-        if (counter >= explosionTime)
-        {
-            Kill();
-        }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (!hasCollided && other.tag == "Explosion")
-        {
-            Explosion otherExplosion = other.GetComponent<Explosion>();
-            if (otherExplosion.id != id)
+		if(lifetime > 1.0F) return;
+			lifetime += Time.deltaTime;
+            if (linepoints != null && linepoints.Count > 0)
             {
-                Vector3 hv = other.transform.position - transform.position;
-                Vector3 pos = transform.position + (hv * 0.5f);
+                for (int i = 0; i < linepoints.Count; i += 2)
+                {
+                    linepoints[i].rate = Mathf.PingPong(Time.time * 10, 1.0F);
+                    linepoints[i].velocity = Vector3.Lerp(linepoints[i].vel_min, linepoints[i].vel_max, linepoints[i].rate);
+                    linepoints[i].currentpoint = linepoints[i].initialpoint + (linepoints[i].velocity * influencerate.Evaluate(lifetime));
+                    foreach (Transform t in linepoints[i].transform)
+                    {
+                        t.position = linepoints[i].currentpoint;
+                    }
 
-                JoinedArea joinedArea = GameObject.Instantiate(joinedAreaPrefab).GetComponent<JoinedArea>();
-                joinedArea.Init(this, otherExplosion);
-
-                joinedArea.transform.position = pos;
-
-                hasCollided = true;
-                otherExplosion.hasCollided = true;
-            }
-        }
-        else if (other.tag == "Bullet")
-        {
-            other.GetComponent<Bullet>().Kill();
-        }
+                }
+			}
     }
-
-    private void Kill ()
-    {
-        if (OnDead != null) OnDead();
-        GameObject.Destroy(gameObject);
-    }
-
 
     public void GenerateLinePoints(int num)
     {
@@ -102,7 +57,7 @@ public class Explosion : MonoBehaviour
             linepoints.Clear();
         }
         linepoints = new List<WavePoint>();
-        for (int i = 0; i < num; i++)
+        for (int i = 0; i <= num; i++)
         {
             GameObject linepoint = Instantiate(LinePointPrefab);
             linepoint.name = "Line point " + i;
@@ -158,17 +113,4 @@ public class Explosion : MonoBehaviour
             rate = 0.0F;
         }
     }
-}
-
-public enum WaveColour
-{
-    Red,
-    Blue,
-    Yellow,
-
-    Purple,
-    Green,
-    Orange,
-
-    None
 }

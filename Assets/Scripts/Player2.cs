@@ -11,6 +11,8 @@ public class Player2 : MonoBehaviour
     public KeyCode up;
     public KeyCode down;
 
+    public string JoyVertical, JoyFireButton, JoyChangeColor;
+
     public TowerId id;
     public float angularSpeed = 50;
 
