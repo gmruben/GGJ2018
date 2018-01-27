@@ -24,6 +24,7 @@ public class Player2 : MonoBehaviour
     public MeshRenderer renderer;
     public SpriteRenderer line;
 
+    public bool useRelease;
     private Bullet currentBullet;
     public bool keyboardinput;
 
@@ -92,19 +93,19 @@ public class Player2 : MonoBehaviour
             transform.Rotate(Vector3.forward, angularSpeed * Time.deltaTime);
         }
 
-        if (Input.GetButtonDown (JoyFire))
+        if (Input.GetButtonDown(JoyFire))
         {
-            if (currentBullet != null)
+            currentBullet = GameObject.Instantiate(bulletPrefab).GetComponent<Bullet>();
+            currentBullet.transform.position = transform.position;
+
+            currentBullet.Init(id, CurrentColour, transform.up);
+        }
+        else if (Input.GetButtonUp (JoyFire))
+        {
+            if (currentBullet != null && !currentBullet.hasDesintegrated)
             {
                 currentBullet.Explode();
                 currentBullet = null;
-            }
-            else
-            {
-                currentBullet = GameObject.Instantiate(bulletPrefab).GetComponent<Bullet> ();
-                currentBullet.transform.position = transform.position;
-
-                currentBullet.Init (id, CurrentColour, transform.up);
             }
         }
 

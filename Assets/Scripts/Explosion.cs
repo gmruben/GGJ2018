@@ -65,6 +65,7 @@ public class Explosion : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.tag);
         if (!hasCollided && other.tag == "Explosion")
         {
             Explosion otherExplosion = other.GetComponent<Explosion>();
@@ -100,7 +101,7 @@ public class Explosion : MonoBehaviour
         else if (other.tag == "Bullet")
         {
             Bullet otherBullet = other.GetComponent<Bullet>();
-            if (true) //otherBullet.id != id)
+            if (otherBullet.id != id)
             {
                 other.GetComponent<Bullet>().Desintegrate();
             }
