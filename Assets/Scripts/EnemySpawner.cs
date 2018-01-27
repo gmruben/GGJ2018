@@ -6,11 +6,14 @@ public class EnemySpawner : MonoBehaviour
 {
     public event Action OnEnemyKilled;
 
-    public GameObject enemyPrefab;
+    public GameObject[] enemyPrefabs;
     public float maxPosX = 6;
 
     public float minSpawnTime;
     public float maxSpawnTime;
+
+    public float minEnemySpeed;
+    public float maxEnemySpeed;
 
     public WaveColour[] colours;
     public float speed;
@@ -43,9 +46,10 @@ public class EnemySpawner : MonoBehaviour
     private void Spawn ()
     {
         WaveColour colour = colours[UnityEngine.Random.Range(0, colours.Length)];
+        float speed = UnityEngine.Random.Range(minEnemySpeed, maxEnemySpeed);
 
-        Enemy enemy = GameObject.Instantiate(enemyPrefab).GetComponent<Enemy> ();
-        enemy.Init(colour);
+        Enemy enemy = GameObject.Instantiate(enemyPrefabs[UnityEngine.Random.Range (0, enemyPrefabs.Length)]).GetComponent<Enemy> ();
+        enemy.Init(colour, speed);
 
         enemy.transform.position = transform.position;
         enemy.OnKilled += HandleOnEnemyKilled;

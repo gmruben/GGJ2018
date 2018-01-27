@@ -64,7 +64,6 @@ public class Explosion : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.tag);
         if (!hasCollided && other.tag == "Explosion")
         {
             Explosion otherExplosion = other.GetComponent<Explosion>();

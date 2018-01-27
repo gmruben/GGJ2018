@@ -9,12 +9,12 @@ public static class GameUtil
 
     public static Color GetColor(WaveColour colour)
     {
-        if (colour == WaveColour.Red) return Color.red;
-        else if (colour == WaveColour.Blue) return Color.blue;
-        else if (colour == WaveColour.Yellow) return Color.yellow;
-        else if (colour == WaveColour.Purple) return new Color(0.5f, 0.0f, 1.0f);
-        else if (colour == WaveColour.Green) return Color.green;
-        else if (colour == WaveColour.Orange) return new Color (1.0f, 0.5f, 0.0f);
+        if (colour == WaveColour.Red) return ColorPalette.instance.red;
+        else if (colour == WaveColour.Blue) return ColorPalette.instance.blue;
+        else if (colour == WaveColour.Yellow) return ColorPalette.instance.yellow;
+        else if (colour == WaveColour.Purple) return ColorPalette.instance.purple;
+        else if (colour == WaveColour.Green) return ColorPalette.instance.green;
+        else if (colour == WaveColour.Orange) return ColorPalette.instance.orange;
 
         return Color.white;
     }

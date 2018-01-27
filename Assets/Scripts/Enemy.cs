@@ -11,15 +11,16 @@ public class Enemy : MonoBehaviour
 
     public GameObject enemyExplosionPrefab;
 
-    public float speed;
-    public MeshRenderer renderer;
+    private float speed;
+    public SpriteRenderer renderer;
     public WaveColour colour;
 
-    public void Init(WaveColour colour)
+    public void Init(WaveColour colour, float speed)
     {
         this.colour = colour;
+        this.speed = speed;
 
-        renderer.material.SetColor("_Color", GameUtil.GetColor(colour));
+        renderer.color = GameUtil.GetColor(colour);
     }
 
     void Update ()

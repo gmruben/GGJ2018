@@ -36,7 +36,6 @@ public class JoinedArea : MonoBehaviour
             if (d1 <= GameUtil.ExplosionRadiusSquared && d2 <= GameUtil.ExplosionRadiusSquared)
             {
                 Enemy enemy = other.GetComponent<Enemy>();
-                Debug.Log(enemy.colour + " - " +  colour);
                 if (enemy.colour == colour)
                 {
                     enemy.Kill();
