@@ -10,12 +10,6 @@ public class AudioManager : MonoBehaviour {
 	public float VolumeMain = 1.0F;
 	public AudioClipContainer [] sfx_clips;
 	public AudioClipContainer [] music_clips;
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
 	
 
 	public static void PlaySFX(string name, Transform t = null)
@@ -40,10 +34,10 @@ public class AudioManager : MonoBehaviour {
 	static IEnumerator PlayOnAudioSource(AudioClipContainer a, AudioSource source)
 	{
 		Debug.Log("queued playing audio clip " + a.name + " on source " + source);
-		while(source.isPlaying && a.wait_for_playtime) 
-		{
-			yield return null;
-		}
+		//while(source.isPlaying && a.wait_for_playtime) 
+		//{
+		//	yield return null;
+		//}
 
 		source.PlayOneShot(a.clip, a.volume * instance.VolumeMain);
 
@@ -58,7 +52,7 @@ public class AudioManager : MonoBehaviour {
 		for(int i = 0; i < instance.sfxsource_pool.Length; i++)
 		{
 			if(!instance.sfxsource_pool[i].isPlaying) return instance.sfxsource_pool[i];
-			if(target == null || (instance.sfxsource_pool[i].time / instance.sfxsource_pool[i].clip.length) > 0.8F)
+			if(target == null)
 			{
 				target = instance.sfxsource_pool[i];
 			}

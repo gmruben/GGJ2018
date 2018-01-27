@@ -11,10 +11,7 @@ public class Player2 : MonoBehaviour
     public KeyCode up;
     public KeyCode down;
 
-    //public string JoyL;
-    //public string JoyR;
     public string JoyFire;
-    public string JoyChangeColour;
 
     public string aimX;
     public string aimY;
@@ -23,9 +20,7 @@ public class Player2 : MonoBehaviour
 
     public PlayerId id;
     public float angularSpeed = 50;
-
-    //public WaveColour[] colours;
-    //public int currentColourIndex;
+    
     public MeshRenderer renderer;
     public SpriteRenderer line;
     
@@ -41,18 +36,11 @@ public class Player2 : MonoBehaviour
 
     void Update()
     {
-
-        /*if (Input.GetButton(JoyR))
-        {
-            transform.Rotate(Vector3.forward, -angularSpeed * Time.deltaTime);
-        }
-        else if (Input.GetButton(JoyL))
-        {
-            transform.Rotate(Vector3.forward, angularSpeed * Time.deltaTime);
-        }*/
-
         if (Input.GetButtonDown(JoyFire))
         {
+            if (id == PlayerId.P1) AudioManager.PlaySFX("P1Shoots");
+            else AudioManager.PlaySFX("P2Shoots");
+
             currentBullet = GameObject.Instantiate(bulletPrefab).GetComponent<Bullet>();
             currentBullet.transform.position = transform.position;
 
@@ -66,16 +54,6 @@ public class Player2 : MonoBehaviour
                 currentBullet = null;
             }
         }
-
-        /*if (Input.GetButtonDown(JoyChangeColour))
-        {
-            currentColourIndex++;
-            if (currentColourIndex >= colours.Length)
-            {
-                currentColourIndex = 0;
-            }
-            UpdateColour();
-        }*/
 
         float ax = Input.GetAxis(aimX);
         float ay = -Input.GetAxis(aimY);
@@ -94,14 +72,6 @@ public class Player2 : MonoBehaviour
             colorArrow.rotation = Quaternion.FromToRotation(Vector3.up, colorVector);
         }
     }
-
-    /*public WaveColour CurrentColour
-    {
-        get
-        {
-            return colours [currentColourIndex];
-        }
-    }*/
 
     public WaveColour CurrentColour
     {

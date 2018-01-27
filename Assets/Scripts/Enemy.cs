@@ -34,6 +34,8 @@ public class Enemy : MonoBehaviour
     
     public void Kill (int combo)
     {
+        AudioManager.PlaySFX("EnemyDies");
+
         ParticleSystemRenderer explosion = GameObject.Instantiate(enemyExplosionPrefab).GetComponent<ParticleSystemRenderer>();
         explosion.transform.position = transform.position;
 
