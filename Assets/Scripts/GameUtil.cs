@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class GameUtil
 {
+    public static float ScreenXRange = 2.5F;
     public static float explosionRadius = 1.5f;
     public static float ExplosionRadiusSquared { get { return explosionRadius * explosionRadius; } }
 
@@ -19,7 +20,7 @@ public static class GameUtil
         return Color.white;
     }
 
-    public static WaveColour GetCombinedColor (WaveColour c1, WaveColour c2)
+    public static WaveColour GetCombinedColor(WaveColour c1, WaveColour c2)
     {
         if (c1 == WaveColour.Red)
         {
@@ -41,5 +42,43 @@ public static class GameUtil
         }
 
         return WaveColour.None;
+    }
+
+    public static WaveColour RandomColor
+    {
+        get
+        {
+            if (Random.value > 0.85F)
+            {
+                int rand = Random.Range(0, 3);
+                switch (rand)
+                {
+                    case 0: return WaveColour.Red;
+                    case 1: return WaveColour.Yellow;
+                    case 2: return WaveColour.Blue;
+                }
+            }
+            else
+            {
+                int rand = Random.Range(0, 3);
+                switch (rand)
+                {
+                    case 0: return WaveColour.Green;
+                    case 1: return WaveColour.Purple;
+                    case 2: return WaveColour.Orange;
+                }
+
+            }
+            return WaveColour.Green;
+        }
+    }
+
+    private static float minSpeed = 0.5F, maxSpeed = 1.5F;
+    public static float RandomSpeed
+    {
+        get
+        {
+            return Random.Range(minSpeed, maxSpeed);
+        }
     }
 }

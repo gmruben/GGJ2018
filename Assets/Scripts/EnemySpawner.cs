@@ -22,24 +22,37 @@ public class EnemySpawner : MonoBehaviour
     private float spawnTime;
     private int direction = 1;
 
+    public List<EnemyWave> randomwaves;
+    public List<EnemyWave> tutewaves;
+
     void Awake ()
     {
-        Spawn();
+        //Spawn();
     }
 
     void Update ()
     {
-        transform.position += Vector3.right * direction * speed * Time.deltaTime;
+        if(Input.GetKeyDown(KeyCode.U)) StartWave(randomwaves[0]);
+        /*transform.position += Vector3.right * direction * speed * Time.deltaTime;
         if (Mathf.Abs (transform.position.x) > maxPosX)
         {
             transform.position = new Vector3(maxPosX * direction, transform.position.y, transform.position.z);
             direction = -direction;
         }
-
-        counter += Time.deltaTime;
+*/
+        /*counter += Time.deltaTime;
         if (counter >= spawnTime)
         {
             Spawn();
+        }*/
+    }
+
+    public void StartWave(EnemyWave w)
+    {
+        w.StartWave();
+        if(w.SpawnRandomEnemies > 0)
+        {
+            for(int i = 0; i < w.SpawnRandomEnemies; i++) Spawn();
         }
     }
 
@@ -56,6 +69,10 @@ public class EnemySpawner : MonoBehaviour
 
         spawnTime = UnityEngine.Random.Range(minSpawnTime, maxSpawnTime);
         counter = 0.0f;
+
+        Vector3 randpoint = transform.position;
+        randpoint.x = UnityEngine.Random.Range(-maxPosX, maxPosX);
+        transform.position = randpoint; 
     }
 
     private void HandleOnEnemyKilled (Enemy enemy)

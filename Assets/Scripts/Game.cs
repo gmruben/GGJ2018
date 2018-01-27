@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour
 {
+
+    public static Game instance;
     public BottomCollider bottomCollider;
     public int gameOverNumEnemies = 3;
 
@@ -17,8 +19,11 @@ public class Game : MonoBehaviour
     private int numEnemies = 0;
     private bool isGameOver;
 
+    
+
     void Awake ()
     {
+        instance = this;
         isGameOver = false;
         gameOverScreen.SetActive (false);
     }

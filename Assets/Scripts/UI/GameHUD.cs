@@ -5,8 +5,12 @@ using UnityEngine.UI;
 
 public class GameHUD : MonoBehaviour
 {
+
+    private Canvas _canvas;
     public Text scoreLabel;
     public EnemySpawner enemySpawner;
+
+
 
     private int score;
 
@@ -16,7 +20,12 @@ public class GameHUD : MonoBehaviour
         UpdateLabel ();
 
         enemySpawner.OnEnemyKilled += HandleOnEnemyKilled;
+        _canvas = this.GetComponent<Canvas>();
     }
+
+    void Update () {
+		
+	}
 
     private void UpdateLabel ()
     {
@@ -28,4 +37,11 @@ public class GameHUD : MonoBehaviour
         score++;
         UpdateLabel();
     }
+}
+
+[System.Serializable]
+public struct Overlay
+{
+    public string name;
+    public float lifetime;
 }

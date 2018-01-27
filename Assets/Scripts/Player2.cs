@@ -34,7 +34,7 @@ public class Player2 : MonoBehaviour
     public Transform aimArrow;
     public Transform colorArrow;
 
-    void Awake ()
+    void Start ()
     {
         UpdateColour();
     }

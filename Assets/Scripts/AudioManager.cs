@@ -16,9 +16,7 @@ public class AudioManager : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		if(Input.GetKeyDown(KeyCode.Space)) PlaySFX("player_move");
-	}
+	
 
 	public static void PlaySFX(string name, Transform t = null)
 	{
