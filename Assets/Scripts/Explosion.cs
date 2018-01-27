@@ -16,7 +16,7 @@ public class Explosion : MonoBehaviour
 
     private float counter;
 
-    public TowerId id;
+    public PlayerId id;
     public WaveColour colour;
 
     public bool hasCollided;
@@ -26,7 +26,12 @@ public class Explosion : MonoBehaviour
     public AnimationCurve alpha_curve;
 
     private Color color_init, color_noalpha, color_halfalpha;
-    public void Init(TowerId id, WaveColour colour)
+    public GameObject LinePointPrefab;
+    
+    public AnimationCurve influencerate;
+	 float lifetime = 0.0F;
+
+    public void Init(PlayerId id, WaveColour colour)
     {
         this.id = id;
         this.colour = colour;
@@ -77,7 +82,11 @@ public class Explosion : MonoBehaviour
         }
         else if (other.tag == "Bullet")
         {
-            other.GetComponent<Bullet>().Kill();
+            Bullet otherBullet = other.GetComponent<Bullet>();
+            if (otherBullet.id != id)
+            {
+                other.GetComponent<Bullet>().Kill();
+            }
         }
     }
 
@@ -86,7 +95,6 @@ public class Explosion : MonoBehaviour
         if (OnDead != null) OnDead();
         GameObject.Destroy(gameObject);
     }
-
 }
 
 public enum WaveColour

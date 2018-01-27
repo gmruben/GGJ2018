@@ -133,7 +133,6 @@ MonoBehaviour:
   linerenderer: {fileID: 114821238760911928}
   LinePointPrefab: {fileID: 1051381785081580, guid: ae18120a01ba8a74199fd5f752f79b4e,
     type: 2}
-  radius: 0.75
   influencerate:
     serializedVersion: 2
     m_Curve:
@@ -190,6 +189,14 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  LinePointPrefab: {fileID: 1051381785081580, guid: ae18120a01ba8a74199fd5f752f79b4e,
+    type: 2}
+  influencerate:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &114821238760911928
 MonoBehaviour:
   m_ObjectHideFlags: 1

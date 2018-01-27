@@ -5,6 +5,7 @@ using UnityEngine;
 public static class GameUtil
 {
     public static float explosionRadius = 1.5f;
+    public static float ExplosionRadiusSquared { get { return explosionRadius * explosionRadius; } }
 
     public static Color GetColor(WaveColour colour)
     {

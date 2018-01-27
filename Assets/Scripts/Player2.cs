@@ -11,9 +11,12 @@ public class Player2 : MonoBehaviour
     public KeyCode up;
     public KeyCode down;
 
-    public string JoyVertical, JoyFireButton, JoyChangeColor;
+    public string JoyL;
+    public string JoyR;
+    public string JoyFire;
+    public string JoyChangeColour;
 
-    public TowerId id;
+    public PlayerId id;
     public float angularSpeed = 50;
 
     public WaveColour[] colours;
@@ -29,16 +32,16 @@ public class Player2 : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(down))
-        {
-            transform.Rotate(Vector3.forward, angularSpeed * Time.deltaTime);
-        }
-        else if (Input.GetKey(up))
+        if (Input.GetButton(JoyR))
         {
             transform.Rotate(Vector3.forward, -angularSpeed * Time.deltaTime);
         }
+        else if (Input.GetButton(JoyL))
+        {
+            transform.Rotate(Vector3.forward, angularSpeed * Time.deltaTime);
+        }
 
-        if (Input.GetKeyDown(fire))
+        if (Input.GetButtonDown (JoyFire))
         {
             if (currentBullet != null)
             {
@@ -54,7 +57,7 @@ public class Player2 : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(colour))
+        if (Input.GetButtonDown (JoyChangeColour))
         {
             currentColourIndex++;
             if (currentColourIndex >= colours.Length)
