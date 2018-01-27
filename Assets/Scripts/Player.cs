@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public KeyCode up;
     public KeyCode down;
 
-    public TowerId id;
+    public PlayerId id;
 
     private bool inCone;
     private float coneCounter;

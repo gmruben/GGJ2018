@@ -6,16 +6,16 @@ public class Bullet : MonoBehaviour
 {
     public float speed = 5;
 
-    public TowerId owner;
+    public PlayerId id;
     public WaveColour colour;
     public GameObject explosionPrefab;
 
     public Vector3 direction;
     public MeshRenderer renderer;
 
-    public void Init(TowerId owner, WaveColour colour, Vector3 direction)
+    public void Init(PlayerId id, WaveColour colour, Vector3 direction)
     {
-        this.owner = owner;
+        this.id = id;
         this.direction = direction;
         this.colour = colour;
 
@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour
     public void Explode ()
     {
         Explosion explosion = GameObject.Instantiate(explosionPrefab).GetComponent<Explosion> ();
-        explosion.Init (owner, colour);
+        explosion.Init (id, colour);
 
         explosion.transform.position = transform.position;
 

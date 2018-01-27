@@ -6,7 +6,7 @@ public class WaveParticle : MonoBehaviour
 {
     public GameObject explosionPrefab;
 
-    public TowerId owner;
+    public PlayerId owner;
     public Vector3 direction;
     public bool hasCollided;
     public GameObject parent;
@@ -14,7 +14,7 @@ public class WaveParticle : MonoBehaviour
     public bool useExplosion;
     private float speed;
 
-    public void Init (TowerId owner, GameObject parent, Vector3 direction, float speed)
+    public void Init (PlayerId owner, GameObject parent, Vector3 direction, float speed)
 	{
         this.owner = owner;
         this.parent = parent;

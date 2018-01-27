@@ -306,6 +306,31 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7d82976e6b2f80b40840d1c178462b3d, type: 2}
+    - target: {fileID: 114102542646957272, guid: bd26945b6e905fd44adf0bc6c7359460,
+        type: 2}
+      propertyPath: JoyFireButton
+      value: Fire2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114102542646957272, guid: bd26945b6e905fd44adf0bc6c7359460,
+        type: 2}
+      propertyPath: JoyL
+      value: LB2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114102542646957272, guid: bd26945b6e905fd44adf0bc6c7359460,
+        type: 2}
+      propertyPath: JoyR
+      value: RB2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114102542646957272, guid: bd26945b6e905fd44adf0bc6c7359460,
+        type: 2}
+      propertyPath: JoyFire
+      value: Fire2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114102542646957272, guid: bd26945b6e905fd44adf0bc6c7359460,
+        type: 2}
+      propertyPath: JoyChangeColour
+      value: ChangeColour2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bd26945b6e905fd44adf0bc6c7359460, type: 2}
   m_IsPrefabParent: 0
@@ -408,6 +433,31 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7d82976e6b2f80b40840d1c178462b3d, type: 2}
+    - target: {fileID: 114102542646957272, guid: bd26945b6e905fd44adf0bc6c7359460,
+        type: 2}
+      propertyPath: JoyFireButton
+      value: Fire1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114102542646957272, guid: bd26945b6e905fd44adf0bc6c7359460,
+        type: 2}
+      propertyPath: JoyL
+      value: LB1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114102542646957272, guid: bd26945b6e905fd44adf0bc6c7359460,
+        type: 2}
+      propertyPath: JoyR
+      value: RB1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114102542646957272, guid: bd26945b6e905fd44adf0bc6c7359460,
+        type: 2}
+      propertyPath: JoyFire
+      value: Fire1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114102542646957272, guid: bd26945b6e905fd44adf0bc6c7359460,
+        type: 2}
+      propertyPath: JoyChangeColour
+      value: ChangeColour1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bd26945b6e905fd44adf0bc6c7359460, type: 2}
   m_IsPrefabParent: 0
@@ -418,11 +468,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114675082943900370, guid: dbcd0ab1e0109ec4497ea3fe43b2494d,
-        type: 2}
-      propertyPath: colours.Array.size
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 4622936203775264, guid: dbcd0ab1e0109ec4497ea3fe43b2494d, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -457,23 +502,13 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114675082943900370, guid: dbcd0ab1e0109ec4497ea3fe43b2494d,
         type: 2}
-      propertyPath: spawnTime
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114675082943900370, guid: dbcd0ab1e0109ec4497ea3fe43b2494d,
-        type: 2}
-      propertyPath: colours.Array.data[0]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114675082943900370, guid: dbcd0ab1e0109ec4497ea3fe43b2494d,
-        type: 2}
-      propertyPath: colours.Array.data[1]
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 114675082943900370, guid: dbcd0ab1e0109ec4497ea3fe43b2494d,
-        type: 2}
-      propertyPath: colours.Array.data[2]
+      propertyPath: minSpawnTime
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114675082943900370, guid: dbcd0ab1e0109ec4497ea3fe43b2494d,
+        type: 2}
+      propertyPath: maxSpawnTime
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbcd0ab1e0109ec4497ea3fe43b2494d, type: 2}

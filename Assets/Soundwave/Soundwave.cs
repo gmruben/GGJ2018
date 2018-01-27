@@ -9,7 +9,6 @@ public class Soundwave : MonoBehaviour
     public GameObject LinePointPrefab;
 
     public List<WavePoint> linepoints;
-    public float radius = 25;
 
     public AnimationCurve influencerate;
 	 float lifetime = 0.0F;
@@ -64,7 +63,7 @@ public class Soundwave : MonoBehaviour
 
             float angle = 360 / num * i;
 
-            linepoint.transform.position = RandomCircle(this.transform.position, radius, angle);
+            linepoint.transform.position = RandomCircle(this.transform.position, GameUtil.explosionRadius, angle);
             linepoint.transform.SetParent(this.transform);
 
             Vector3 velc = linepoint.transform.position - this.transform.position;
@@ -74,7 +73,7 @@ public class Soundwave : MonoBehaviour
         }
         GameObject linepointfinal = Instantiate(LinePointPrefab);
         linepointfinal.name = "Line point " + num;
-        linepointfinal.transform.position = RandomCircle(this.transform.position, radius, 0);
+        linepointfinal.transform.position = RandomCircle(this.transform.position, GameUtil.explosionRadius, 0);
         Vector3 vel = linepointfinal.transform.position - this.transform.position;
         vel /= 10;
         linepoints[0].transform.Add(linepointfinal.transform);

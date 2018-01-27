@@ -5,7 +5,7 @@ using UnityEngine;
 public class Tower : MonoBehaviour
 {
 	public KeyCode keyCode;
-    public TowerId id;
+    public PlayerId id;
 
     public GameObject waveParticlePrefab;
 
@@ -35,4 +35,4 @@ public class Tower : MonoBehaviour
 	}
 }
 
-public enum TowerId { Left, Right }
+public enum PlayerId { P1, P2 }
