@@ -16,6 +16,7 @@ public class Bullet : MonoBehaviour
 
     public ParticleSystemRenderer destroyParticleSystem;
     public Collider collider;
+    public bool hasDesintegrated { get; private set; }
 
     void Awake ()
     {
@@ -50,7 +51,7 @@ public class Bullet : MonoBehaviour
 
         explosion.transform.position = transform.position;
 
-        GameObject.Destroy(gameObject);
+        Kill();
     }
 
     public void Kill ()
@@ -60,6 +61,8 @@ public class Bullet : MonoBehaviour
 
     public void Desintegrate ()
     {
+        hasDesintegrated = true;
+
         renderer.gameObject.SetActive (false);
         for (int i = 0; i < trailRenderers.Length; i++)
         {
