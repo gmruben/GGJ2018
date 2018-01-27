@@ -30,12 +30,8 @@ public class EnemyWave : MonoBehaviour
     }
     IEnumerator StartWaveRoutine()
     {
-
 		if(OverlayMessage != string.Empty) OverlayHUD.instance.LoadOverlay(OverlayMessage);
-		EnemySpawner.instance.Spawn()
-
-
-
+	
         GameObject grouptarg = Instantiate(groups[current].GroupPrefab);
         grouptarg.transform.position = this.transform.position + Vector3.left * Random.Range(-GameUtil.ScreenXRange, GameUtil.ScreenXRange);
 

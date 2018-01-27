@@ -7,7 +7,7 @@ using UnityEditor;
 
 public class Enemy : MonoBehaviour
 {
-    public event Action<Enemy> OnKilled;
+    public event Action<Enemy, int> OnKilled;
 
     public GameObject enemyExplosionPrefab;
 
@@ -28,11 +28,11 @@ public class Enemy : MonoBehaviour
 
     void Update ()
     {
-        //if (Input.GetKeyDown(KeyCode.K)) Kill();
+        if (Input.GetKeyDown(KeyCode.K)) Kill(2);
         transform.position -= Vector3.up * speed * Time.deltaTime;
 	}
     
-    public void Kill ()
+    public void Kill (int combo)
     {
         ParticleSystemRenderer explosion = GameObject.Instantiate(enemyExplosionPrefab).GetComponent<ParticleSystemRenderer>();
         explosion.transform.position = transform.position;
@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
         explosion.material.SetColor("_TintColor", GameUtil.GetColor(colour));
 
         CameraShake.instance.Shake(0.5f, 0.5f);
-        if (OnKilled != null) OnKilled(this);
+        if (OnKilled != null) OnKilled(this, combo);
 
         GameObject.Destroy(gameObject);
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public event Action OnEnemyKilled;
+    public event Action<Enemy, int> OnEnemyKilled;
 
     public GameObject[] enemyPrefabs;
     public float maxPosX = 6;
@@ -75,9 +75,9 @@ public class EnemySpawner : MonoBehaviour
         transform.position = randpoint; 
     }
 
-    private void HandleOnEnemyKilled (Enemy enemy)
+    private void HandleOnEnemyKilled (Enemy enemy, int combo)
     {
         enemy.OnKilled -= HandleOnEnemyKilled;
-        if (OnEnemyKilled != null) OnEnemyKilled ();
+        if (OnEnemyKilled != null) OnEnemyKilled (enemy, combo);
     }
 }
