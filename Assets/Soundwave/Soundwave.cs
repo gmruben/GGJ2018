@@ -18,7 +18,7 @@ public class Soundwave : MonoBehaviour
     void Start()
     {
         if(generate_on_init)
-        GenerateLinePoints(30);
+        GenerateLinePoints(30, 0, 360, true);
     }
 
     float wavesize = 0.6F;
@@ -51,7 +51,7 @@ public class Soundwave : MonoBehaviour
         }
     }
 
-    public void GenerateLinePoints(int num)
+    public void GenerateLinePoints(int num, float startAngle, float lineAngle, bool connect)
     {
         if (linepoints != null && linepoints.Count > 0)
         {
@@ -72,7 +72,7 @@ public class Soundwave : MonoBehaviour
             GameObject linepoint = Instantiate(LinePointPrefab);
             linepoint.name = "Line point " + i;
 
-            float angle = 360 / num * i;
+            float angle = startAngle + (lineAngle / num * i);
 
             linepoint.transform.position = RandomCircle(this.transform.position, GameUtil.explosionRadius, angle);
             linepoint.transform.SetParent(this.transform);
@@ -82,13 +82,17 @@ public class Soundwave : MonoBehaviour
             WavePoint c = new WavePoint(linepoint.transform, velc * intensity, -velc * intensity);
             linepoints.Add(c);
         }
-        GameObject linepointfinal = Instantiate(LinePointPrefab);
-        linepointfinal.name = "Line point " + num;
-        linepointfinal.transform.position = RandomCircle(this.transform.position, GameUtil.explosionRadius, 0);
-        Vector3 vel = linepointfinal.transform.position - this.transform.position;
-        vel /= 10;
-        linepoints[0].transform.Add(linepointfinal.transform);
-        linepointfinal.transform.SetParent(this.transform);
+
+        if (connect)
+        {
+            GameObject linepointfinal = Instantiate(LinePointPrefab);
+            linepointfinal.name = "Line point " + num;
+            linepointfinal.transform.position = RandomCircle(this.transform.position, GameUtil.explosionRadius, 0);
+            Vector3 vel = linepointfinal.transform.position - this.transform.position;
+            vel /= 10;
+            linepoints[0].transform.Add(linepointfinal.transform);
+            linepointfinal.transform.SetParent(this.transform);
+        }
     }
 
     Vector3 RandomCircle(Vector3 center, float radius, float a)

@@ -15,12 +15,15 @@ public class Enemy : MonoBehaviour
     public SpriteRenderer renderer;
     public WaveColour colour;
 
+    public float radius { get; private set; }
+
     public void Init(WaveColour colour, float speed)
     {
         this.colour = colour;
         this.speed = speed;
 
         renderer.color = GameUtil.GetColor(colour);
+        radius = GetComponent<SphereCollider>().radius;
     }
 
     void Update ()
@@ -37,7 +40,7 @@ public class Enemy : MonoBehaviour
         explosion.material.SetColor("_Color", GameUtil.GetColor(colour));
         explosion.material.SetColor("_TintColor", GameUtil.GetColor(colour));
 
-        CameraShake.instance.Shake(0.5f);
+        CameraShake.instance.Shake(0.5f, 0.5f);
         if (OnKilled != null) OnKilled(this);
 
         GameObject.Destroy(gameObject);

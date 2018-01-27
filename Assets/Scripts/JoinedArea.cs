@@ -32,10 +32,12 @@ public class JoinedArea : MonoBehaviour
         {
             float d1 = (other.transform.position - pos1).sqrMagnitude;
             float d2 = (other.transform.position - pos2).sqrMagnitude;
-            
-            if (d1 <= GameUtil.ExplosionRadiusSquared && d2 <= GameUtil.ExplosionRadiusSquared)
+
+            Enemy enemy = other.GetComponent<Enemy>();
+            float radiusSquared = GameUtil.ExplosionRadiusSquared - (enemy.radius * enemy.radius);
+
+            if (d1 <= radiusSquared && d2 <= radiusSquared)
             {
-                Enemy enemy = other.GetComponent<Enemy>();
                 if (enemy.colour == colour)
                 {
                     enemy.Kill();

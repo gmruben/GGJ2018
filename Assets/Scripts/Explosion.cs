@@ -57,13 +57,14 @@ public class Explosion : MonoBehaviour
         Color current = Color.Lerp(color_init, color_noalpha, alpha_curve.Evaluate(counter / explosionTime));
         renderer.color = Color.Lerp(color_halfalpha, color_noalpha, alpha_curve.Evaluate(counter / explosionTime));
         linerenderer.line.SetColors(current, current);
+
         if (counter >= explosionTime)
         {
             Kill();
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if (!hasCollided && other.tag == "Explosion")
         {
@@ -73,7 +74,7 @@ public class Explosion : MonoBehaviour
                 Vector3 hv = other.transform.position - transform.position;
                 Vector3 pos = transform.position + (hv * 0.5f);
 
-                Vector2 intersect_a, intersect_b;
+                /*Vector2 intersect_a, intersect_b;
                 int intersect = CircleIntersections(new Vector3(transform.position.x, transform.position.y, GameUtil.explosionRadius),
                                                     new Vector3(otherExplosion.transform.position.x, otherExplosion.transform.position.y, GameUtil.explosionRadius),
                                                     out intersect_a, out intersect_b);
@@ -85,8 +86,8 @@ public class Explosion : MonoBehaviour
                                                                  otherExplosion.GetIntersectionPoints((Vector3)intersect_b, (Vector3)intersect_a);
                 
                 points_a.AddRange(points_b);
-               if(points_a.Count > 0) GenerateLine(points_a);
-               if(points_b.Count > 0)  otherExplosion.GenerateLine(points_b);
+                if(points_a.Count > 0) GenerateLine(points_a);
+                if(points_b.Count > 0)  otherExplosion.GenerateLine(points_b);*/
 
                 JoinedArea joinedArea = GameObject.Instantiate(joinedAreaPrefab).GetComponent<JoinedArea>();
                 joinedArea.Init(this, otherExplosion);
