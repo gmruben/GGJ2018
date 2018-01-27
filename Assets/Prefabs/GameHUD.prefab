@@ -129,6 +129,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf4f85308d05c645a5f6a8fb89de5ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  comboLabelPrefab: {fileID: 1100364835116956, guid: c727c2c65edf1f54ba420ca04ee8badc,
+    type: 2}
+  uiCamera: {fileID: 0}
   scoreLabel: {fileID: 114733767925878316}
   enemySpawner: {fileID: 0}
 --- !u!114 &114822822822633320

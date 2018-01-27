@@ -11,6 +11,7 @@ public class JoinedArea : MonoBehaviour
     private Explosion e2;
 
     public WaveColour colour;
+    private int numKilledEnemies;
 
     public void Init (Explosion e1, Explosion e2)
     {
@@ -24,6 +25,7 @@ public class JoinedArea : MonoBehaviour
         e2.OnDead += HandleOnExplosionDead;
 
         colour = GameUtil.GetCombinedColor(e1.colour, e2.colour);
+        numKilledEnemies = 0;
     }
 
     void OnTriggerStay(Collider other)
@@ -38,7 +40,8 @@ public class JoinedArea : MonoBehaviour
             {
                 if (enemy.colour == colour)
                 {
-                    enemy.Kill();
+                    numKilledEnemies++;
+                    enemy.Kill(numKilledEnemies);
                 }
             }
         }
