@@ -16,17 +16,19 @@ public class Explosion : MonoBehaviour
     private float counter;
 
     public TowerId id;
-    public ExplosionColour colour;
+    public WaveColour colour;
 
     public bool hasCollided;
 
-    public void Init(TowerId id, ExplosionColour colour)
+    public void Init(TowerId id, WaveColour colour)
     {
         this.id = id;
         this.colour = colour;
 
         Color c = GameUtil.GetColor(colour);
         renderer.color = new Color(c.r, c.g, c.b, 0.5f);
+
+        transform.localScale = Vector3.one * GameUtil.explosionRadius * 2;
     }
 
 	void Update ()
@@ -40,7 +42,6 @@ public class Explosion : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("TAG: " + other.tag);
         if (!hasCollided && other.tag == "Explosion")
         {
             Explosion otherExplosion = other.GetComponent<Explosion>();
@@ -71,8 +72,15 @@ public class Explosion : MonoBehaviour
     }
 }
 
-public enum ExplosionColour
+public enum WaveColour
 {
     Red,
-    Blue
+    Blue,
+    Yellow,
+
+    Purple,
+    Green,
+    Orange,
+
+    None
 }

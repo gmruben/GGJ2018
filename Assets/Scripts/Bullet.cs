@@ -7,13 +7,13 @@ public class Bullet : MonoBehaviour
     public float speed = 5;
 
     public TowerId owner;
-    public ExplosionColour colour;
+    public WaveColour colour;
     public GameObject explosionPrefab;
 
     public Vector3 direction;
     public MeshRenderer renderer;
 
-    public void Init(TowerId owner, ExplosionColour colour, Vector3 direction)
+    public void Init(TowerId owner, WaveColour colour, Vector3 direction)
     {
         this.owner = owner;
         this.direction = direction;

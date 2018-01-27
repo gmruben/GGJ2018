@@ -10,6 +10,8 @@ public class JoinedArea : MonoBehaviour
     private Explosion e1;
     private Explosion e2;
 
+    public WaveColour colour;
+
     public void Init (Explosion e1, Explosion e2)
     {
         this.e1 = e1;
@@ -20,20 +22,25 @@ public class JoinedArea : MonoBehaviour
 
         e1.OnDead += HandleOnExplosionDead;
         e2.OnDead += HandleOnExplosionDead;
+
+        colour = GameUtil.GetCombinedColor(e1.colour, e2.colour);
     }
 
     void OnTriggerStay(Collider other)
     {
-        Debug.Log(other.tag);
         if (other.tag == "Enemy")
         {
             float d1 = (other.transform.position - pos1).sqrMagnitude;
             float d2 = (other.transform.position - pos2).sqrMagnitude;
-
-            Debug.Log("DISTANCE: " + d1 + " - " + d2);
-            if (d1 <= GameUtil.explosionRadius && d2 <= GameUtil.explosionRadius)
+            
+            if (d1 <= GameUtil.explosionRadius && d2 <= GameUtil.explosionRadius * GameUtil.explosionRadius)
             {
-                other.GetComponent<Enemy>().Kill();
+                Enemy enemy = other.GetComponent<Enemy>();
+                Debug.Log(enemy.colour + " - " +  colour);
+                if (enemy.colour == colour)
+                {
+                    enemy.Kill();
+                }
             }
         }
     }
