@@ -25,16 +25,65 @@ public class Player2 : MonoBehaviour
     public SpriteRenderer line;
 
     private Bullet currentBullet;
+    public bool keyboardinput;
 
     void Awake ()
     {
         UpdateColour();
     }
 
+
     void Update()
     {
- 
-        if (Input.GetButton(JoyR))
+        if(keyboardinput)
+        {
+            KeyboardInput();
+        }
+        else JoyPadInput();
+        
+    }
+
+    void KeyboardInput()
+    {
+        if (Input.GetKey(up))
+        {
+            transform.Rotate(Vector3.forward, -angularSpeed * Time.deltaTime);
+        }
+        else if (Input.GetKey(down))
+        {
+            transform.Rotate(Vector3.forward, angularSpeed * Time.deltaTime);
+        }
+
+        if (Input.GetKeyDown (fire))
+        {
+            if (currentBullet != null)
+            {
+                currentBullet.Explode();
+                currentBullet = null;
+            }
+            else
+            {
+                currentBullet = GameObject.Instantiate(bulletPrefab).GetComponent<Bullet> ();
+                currentBullet.transform.position = transform.position;
+
+                currentBullet.Init (id, CurrentColour, transform.up);
+            }
+        }
+
+        if (Input.GetKeyDown (colour))
+        {
+            currentColourIndex++;
+            if (currentColourIndex >= colours.Length)
+            {
+                currentColourIndex = 0;
+            }
+            UpdateColour();
+        }
+    }
+
+    void JoyPadInput()
+    {
+       if (Input.GetButton(JoyR))
         {
             transform.Rotate(Vector3.forward, -angularSpeed * Time.deltaTime);
         }

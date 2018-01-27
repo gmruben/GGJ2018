@@ -11,11 +11,13 @@ public class Soundwave : MonoBehaviour
     public List<WavePoint> linepoints;
 
     public AnimationCurve influencerate;
+    public bool generate_on_init;
     float lifetime = 0.0F;
 
     // Use this for initialization
     void Start()
     {
+        if(generate_on_init)
         GenerateLinePoints(30);
     }
 
@@ -99,7 +101,9 @@ public class Soundwave : MonoBehaviour
         return pos;
     }
 
-    public class WavePoint
+    
+}
+public class WavePoint
     {
         public List<Transform> transform;
         public Vector3 initialpoint;
@@ -121,4 +125,3 @@ public class Soundwave : MonoBehaviour
             rate = 0.0F;
         }
     }
-}
