@@ -120,7 +120,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: SOME ENEMIES REQUIRE COLLABORATION
+  m_Text: ENEMIES REQUIRE COLLABORATION
 --- !u!222 &222210300627214830
 CanvasRenderer:
   m_ObjectHideFlags: 1

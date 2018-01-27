@@ -48,18 +48,6 @@ public static class GameUtil
     {
         get
         {
-            if (Random.value > 0.85F)
-            {
-                int rand = Random.Range(0, 3);
-                switch (rand)
-                {
-                    case 0: return WaveColour.Red;
-                    case 1: return WaveColour.Yellow;
-                    case 2: return WaveColour.Blue;
-                }
-            }
-            else
-            {
                 int rand = Random.Range(0, 3);
                 switch (rand)
                 {
@@ -67,8 +55,6 @@ public static class GameUtil
                     case 1: return WaveColour.Purple;
                     case 2: return WaveColour.Orange;
                 }
-
-            }
             return WaveColour.Green;
         }
     }

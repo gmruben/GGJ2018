@@ -44,4 +44,6 @@ public struct Overlay
 {
     public string name;
     public float lifetime;
+
+    public string WaitForInput;
 }

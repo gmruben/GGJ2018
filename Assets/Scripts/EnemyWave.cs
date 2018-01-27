@@ -5,12 +5,14 @@ using UnityEngine;
 public class EnemyWave : MonoBehaviour
 {
     public List<WaveGroupData> groups;
-    public float DelayBetweenMoves = 0.0F;
+    public float DelayBetweenMoves = 0.0F, DelayBetweenGroups = 0.0F;
     private int current = 0;
 
-	public string OverlayMessage;
+    public string OverlayMessage;
 
-	public int SpawnRandomEnemies = 0;
+    public float SpawnEnemyRateMin = 0.0F, SpawnEnemyRateMax = 0.0F;
+
+    public bool complete = false;
     // Use this for initialization
     void Start()
     {
@@ -20,7 +22,7 @@ public class EnemyWave : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void StartWave()
@@ -30,53 +32,71 @@ public class EnemyWave : MonoBehaviour
     }
     IEnumerator StartWaveRoutine()
     {
+        complete = false;
+        if (OverlayMessage != string.Empty) OverlayHUD.instance.LoadOverlay(OverlayMessage);
 
-		if(OverlayMessage != string.Empty) OverlayHUD.instance.LoadOverlay(OverlayMessage);
-		EnemySpawner.instance.Spawn()
-
-
-
-        GameObject grouptarg = Instantiate(groups[current].GroupPrefab);
-        grouptarg.transform.position = this.transform.position + Vector3.left * Random.Range(-GameUtil.ScreenXRange, GameUtil.ScreenXRange);
-
-        foreach (Enemy e in grouptarg.GetComponentsInChildren<Enemy>())
+        while (current < groups.Count)
         {
-            WaveColour colour = (e.colour != WaveColour.None) ? e.colour : GameUtil.RandomColor;//colours[UnityEngine.Random.Range(0, colours.Length)];
-
-
-            e.Init(colour, 0.0F);
-        }
-
-        if (groups[current].Speed == 0.0F) groups[current].Speed = GameUtil.RandomSpeed;
-		Vector3 lastpoint = grouptarg.transform.position;
-
-        for (int i = 0; i < groups[current].wavepoints.Length; i++)
-        {
-			 Transform p = groups[current].wavepoints[i];
-			while (Vector3.Distance(grouptarg.transform.position, p.position) > 0.2F)
+            GameObject grouptarg = Instantiate(groups[current].GroupPrefab);
+            grouptarg.transform.position = this.transform.position + Vector3.left * Random.Range(-GameUtil.ScreenXRange, GameUtil.ScreenXRange);
+            List<Enemy> spawnedenemies = new List<Enemy>();
+            foreach (Enemy e in grouptarg.GetComponentsInChildren<Enemy>())
             {
-				Vector3 vel = p.position - grouptarg.transform.position;
+                WaveColour colour = (e.colour != WaveColour.None) ? e.colour : GameUtil.RandomColor;//colours[UnityEngine.Random.Range(0, colours.Length)];
+                e.Init(colour, 0.0F);
+                spawnedenemies.Add(e);
+            }
 
-				grouptarg.transform.position += vel.normalized * Time.deltaTime * groups[current].Speed; 
-				yield return null;
-			}
-           
+            if (groups[current].Speed == 0.0F) groups[current].Speed = GameUtil.RandomSpeed;
+            Vector3 lastpoint = grouptarg.transform.position;
 
-			lastpoint = grouptarg.transform.position;
-            if (DelayBetweenMoves > 0.0F) yield return new WaitForSeconds(DelayBetweenMoves);
-        }
-
-        if (groups[current].MoveToTownOnExit)
-        {
-
-			while (Vector3.Distance(grouptarg.transform.position, Game.instance.bottomCollider.transform.position) > 0.2F)
+            for (int i = 0; i < groups[current].wavepoints.Length; i++)
             {
-				Vector3 vel = Game.instance.bottomCollider.transform.position - grouptarg.transform.position;
+                Transform p = groups[current].wavepoints[i];
+                while (Vector3.Distance(grouptarg.transform.position, p.position) > 0.2F)
+                {
+                    Vector3 vel = p.position - grouptarg.transform.position;
 
-				grouptarg.transform.position += vel.normalized * Time.deltaTime * groups[current].Speed; 
-				yield return null;
-			}
+                    grouptarg.transform.position += vel.normalized * Time.deltaTime * groups[current].Speed;
+                    yield return null;
+                }
+
+
+                lastpoint = grouptarg.transform.position;
+                if (DelayBetweenMoves > 0.0F) yield return new WaitForSeconds(DelayBetweenMoves);
+            }
+
+            if (groups[current].MoveToTownOnExit)
+            {
+
+                while (Vector3.Distance(grouptarg.transform.position, Game.instance.bottomCollider.transform.position) > 0.2F)
+                {
+                    Vector3 vel = Game.instance.bottomCollider.transform.position - grouptarg.transform.position;
+
+                    grouptarg.transform.position += vel.normalized * Time.deltaTime * groups[current].Speed;
+                    yield return null;
+                }
+            }
+            else if(groups[current].WaitForAllDestroyed)
+            {
+                bool enemiesalive = true;
+                while(enemiesalive)
+                {
+                    enemiesalive = false;
+                    for(int i = 0; i < spawnedenemies.Count; i++) if(spawnedenemies[i] != null) 
+                    {
+                        enemiesalive = true;
+                        break;
+                    }
+                    yield return null;
+                }
+            }
+
+            Destroy(grouptarg);
+            current++;
         }
+        complete = true;
+
     }
 
     void OnDrawGizmos()
@@ -97,5 +117,6 @@ public class WaveGroupData
     public float DelayedEntrance;
 
     public float Speed = 10.0F;
+
 }
 

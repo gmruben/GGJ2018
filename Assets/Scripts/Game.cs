@@ -19,43 +19,57 @@ public class Game : MonoBehaviour
     private int numEnemies = 0;
     private bool isGameOver;
 
-    
 
-    void Awake ()
+    
+    void Awake()
     {
         instance = this;
         isGameOver = false;
-        gameOverScreen.SetActive (false);
+        gameOverScreen.SetActive(false);
     }
-    void OnEnable ()
+
+    void Start()
+    {
+        StartCoroutine(Title());
+    }
+
+    IEnumerator Title()
+    {
+        OverlayHUD.instance.LoadOverlay("title");
+
+        while(OverlayHUD.instance.overlay_showing) yield return null;
+
+        EnemySpawner.instance.StartTute();
+    }
+    void OnEnable()
     {
         bottomCollider.OnBottomReached += HandleOnBottomReached;
     }
 
-    void OnDisable ()
+    void OnDisable()
     {
         bottomCollider.OnBottomReached -= HandleOnBottomReached;
     }
 
-    void Update ()
+    void Update()
     {
         if (isGameOver)
         {
-            if (Input.GetButtonDown ("Fire1") || Input.GetButtonDown("Fire2"))
+            if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2"))
             {
                 SceneManager.LoadScene("Main");
             }
         }
     }
 
-    public void HandleOnBottomReached ()
+    public void HandleOnBottomReached()
     {
         numEnemies++;
         if (numEnemies >= gameOverNumEnemies)
         {
             isGameOver = true;
 
-            enemySpawner.SetActive (false);
+            enemySpawner.SetActive(false);
             towerLeft.SetActive(false);
             towerRight.SetActive(false);
 

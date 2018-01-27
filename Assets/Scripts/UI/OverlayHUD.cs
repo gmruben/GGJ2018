@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OverlayHUD : MonoBehaviour
 {
-	public static OverlayHUD instance;
+    public static OverlayHUD instance;
     public AnimationCurve overlay_fadein, overlay_fadeout;
 
     public string overlay_test;
@@ -13,7 +13,9 @@ public class OverlayHUD : MonoBehaviour
 
     private Canvas _canvas;
 
-	void Awake(){instance = this;}
+    public bool overlay_showing;
+
+    void Awake() { instance = this; }
     // Use this for initialization
     void Start()
     {
@@ -23,12 +25,13 @@ public class OverlayHUD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) LoadOverlay(overlay_test);
+        //if (Input.GetKeyDown(KeyCode.Space)) LoadOverlay(overlay_test);
     }
 
 
     public void LoadOverlay(string name)
     {
+        
         for (int i = 0; i < overlays.Length; i++)
         {
             if (name == overlays[i].name)
@@ -42,6 +45,8 @@ public class OverlayHUD : MonoBehaviour
 
     IEnumerator LoadOverlayRoutine(Overlay o)
     {
+        while(overlay_showing) yield return null;
+        overlay_showing = true;
         GameObject obj = Instantiate(Resources.Load<GameObject>(o.name));
         obj.transform.SetParent(_canvas.transform, true);
         (obj.transform as RectTransform).sizeDelta = Vector3.zero;
@@ -53,7 +58,15 @@ public class OverlayHUD : MonoBehaviour
             group.alpha = overlay_fadein.Evaluate(i / 0.45F);
             yield return null;
         }
-        yield return new WaitForSeconds(o.lifetime);
+        
+        if (o.WaitForInput != string.Empty)
+        {
+
+            if(o.WaitForInput == "any") while(!Input.anyKeyDown) yield return null;
+            else while (!Input.GetButtonDown(o.WaitForInput) && Input.GetAxis(o.WaitForInput) == 0.0F) yield return null;
+        }
+        else if (o.lifetime > 0.0F) yield return new WaitForSeconds(o.lifetime);
+
         for (float i = 0; i < 0.45F; i += Time.deltaTime)
         {
             group.alpha = overlay_fadeout.Evaluate(i / 0.45F);
@@ -61,6 +74,7 @@ public class OverlayHUD : MonoBehaviour
         }
 
         Destroy(obj);
+        overlay_showing = false;
 
     }
 }

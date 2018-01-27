@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public static EnemySpawner instance;
+    void Awake(){instance = this;}
     public event Action OnEnemyKilled;
 
     public GameObject[] enemyPrefabs;
@@ -25,14 +27,21 @@ public class EnemySpawner : MonoBehaviour
     public List<EnemyWave> randomwaves;
     public List<EnemyWave> tutewaves;
 
-    void Awake ()
+    private bool spawnEnemies;
+    private int wavenum = 0;
+    public EnemyWave targetwave;
+   /* void Awake()
     {
         //Spawn();
-    }
+    }*/
 
-    void Update ()
+    void Update()
     {
-        if(Input.GetKeyDown(KeyCode.U)) StartWave(randomwaves[0]);
+        /*if (Input.GetKeyDown(KeyCode.U))
+        {
+            StartWave(randomwaves[0]);
+            tutewave_curr++;
+        }*/
         /*transform.position += Vector3.right * direction * speed * Time.deltaTime;
         if (Mathf.Abs (transform.position.x) > maxPosX)
         {
@@ -40,44 +49,84 @@ public class EnemySpawner : MonoBehaviour
             direction = -direction;
         }
 */
-        /*counter += Time.deltaTime;
-        if (counter >= spawnTime)
+
+        if(targetwave != null)
         {
-            Spawn();
-        }*/
+            if(targetwave.complete)
+            {
+                Debug.Log("changing targetwave");
+                 wavenum ++;
+                if(wavenum < tutewaves.Count)
+                {
+                    targetwave = tutewaves[wavenum];
+                    StartWave(targetwave);
+                }
+                else
+                {
+                    GetRandomWave();
+                }
+            }
+        }
+        if (spawnEnemies)
+        {
+            counter += Time.deltaTime;
+            if (counter >= spawnTime)
+            {
+                Spawn();
+            }
+        }
+
     }
+
+    public void GetRandomWave()
+    {
+        targetwave = randomwaves[UnityEngine.Random.Range(0, randomwaves.Count)];
+        StartWave(targetwave);
+    }
+
+    public void StartTute()
+    {
+        wavenum = 0;
+        targetwave = tutewaves[wavenum];
+        StartWave(targetwave);
+    }
+    
 
     public void StartWave(EnemyWave w)
     {
         w.StartWave();
-        if(w.SpawnRandomEnemies > 0)
+        if (w.SpawnEnemyRateMin > 0.0F)
         {
-            for(int i = 0; i < w.SpawnRandomEnemies; i++) Spawn();
+            spawnEnemies = true;
+            spawnTime = UnityEngine.Random.Range(w.SpawnEnemyRateMin, w.SpawnEnemyRateMax);
+            counter = 0.0F;
+            //for(int i = 0; i < w.SpawnRandomEnemies; i++) Spawn();
         }
     }
+    
 
-    private void Spawn ()
+    private void Spawn()
     {
         WaveColour colour = colours[UnityEngine.Random.Range(0, colours.Length)];
         float speed = UnityEngine.Random.Range(minEnemySpeed, maxEnemySpeed);
 
-        Enemy enemy = GameObject.Instantiate(enemyPrefabs[UnityEngine.Random.Range (0, enemyPrefabs.Length)]).GetComponent<Enemy> ();
+        Enemy enemy = GameObject.Instantiate(enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Length)]).GetComponent<Enemy>();
         enemy.Init(colour, speed);
 
         enemy.transform.position = transform.position;
         enemy.OnKilled += HandleOnEnemyKilled;
 
-        spawnTime = UnityEngine.Random.Range(minSpawnTime, maxSpawnTime);
+        //spawnTime = UnityEngine.Random.Range(minSpawnTime, maxSpawnTime);
         counter = 0.0f;
 
         Vector3 randpoint = transform.position;
         randpoint.x = UnityEngine.Random.Range(-maxPosX, maxPosX);
-        transform.position = randpoint; 
+        transform.position = randpoint;
     }
 
-    private void HandleOnEnemyKilled (Enemy enemy)
+    private void HandleOnEnemyKilled(Enemy enemy)
     {
         enemy.OnKilled -= HandleOnEnemyKilled;
-        if (OnEnemyKilled != null) OnEnemyKilled ();
+        if (OnEnemyKilled != null) OnEnemyKilled();
     }
 }
