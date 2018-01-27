@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineSegmentSize: 0.3
-  lineWidth: 0.2
+  lineWidth: 0.025
   showGizmos: 1
   gizmoSize: 0.2
   gizmoColor: {r: 0, g: 1, b: 0.006896496, a: 0.5}

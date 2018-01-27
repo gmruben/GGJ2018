@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198783118979252846}
   - component: {fileID: 199541205893031878}
   m_Layer: 0
-  m_Name: Explosion
+  m_Name: ParticleExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,7 +100,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1108190181
+  randomSeed: -730902629
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -743,7 +743,7 @@ ParticleSystem:
     m_Bursts:
     - time: 0
       minCount: 30
-      maxCount: 30
+      maxCount: 100
       cycleCount: 1
       repeatInterval: 0.01
   SizeModule:
@@ -3322,7 +3322,7 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: aa144f8d46ebbaf459412b04c98ab386, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -3345,7 +3345,7 @@ ParticleSystemRenderer:
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 0.5
+  m_MaxParticleSize: 0.01
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2

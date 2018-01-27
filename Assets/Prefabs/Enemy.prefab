@@ -138,6 +138,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fe4a94251b9b724b9140a98a8090bde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyExplosionPrefab: {fileID: 1585895199412138, guid: a34e14c57235c4f45b379eba0289fa94,
+    type: 2}
   speed: 0.1
   renderer: {fileID: 23042669028549688}
   colour: 0
