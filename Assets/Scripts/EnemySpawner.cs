@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public event Action OnEnemyKilled;
+
     public GameObject enemyPrefab;
     public float maxPosX = 6;
 
@@ -40,14 +42,21 @@ public class EnemySpawner : MonoBehaviour
 
     private void Spawn ()
     {
-        WaveColour colour = colours[Random.Range(0, colours.Length)];
+        WaveColour colour = colours[UnityEngine.Random.Range(0, colours.Length)];
 
         Enemy enemy = GameObject.Instantiate(enemyPrefab).GetComponent<Enemy> ();
         enemy.Init(colour);
 
         enemy.transform.position = transform.position;
+        enemy.OnKilled += HandleOnEnemyKilled;
 
-        spawnTime = Random.Range(minSpawnTime, maxSpawnTime);
+        spawnTime = UnityEngine.Random.Range(minSpawnTime, maxSpawnTime);
         counter = 0.0f;
+    }
+
+    private void HandleOnEnemyKilled (Enemy enemy)
+    {
+        enemy.OnKilled -= HandleOnEnemyKilled;
+        if (OnEnemyKilled != null) OnEnemyKilled ();
     }
 }

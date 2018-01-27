@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
 public class Enemy : MonoBehaviour
 {
+    public event Action<Enemy> OnKilled;
+
     public GameObject enemyExplosionPrefab;
 
     public float speed;
@@ -20,6 +22,7 @@ public class Enemy : MonoBehaviour
 
     void Update ()
     {
+        if (Input.GetKeyDown(KeyCode.K)) Kill();
         transform.position -= Vector3.up * speed * Time.deltaTime;
 	}
     
@@ -30,6 +33,9 @@ public class Enemy : MonoBehaviour
 
         explosion.material.SetColor("_Color", GameUtil.GetColor(colour));
         explosion.material.SetColor("_TintColor", GameUtil.GetColor(colour));
+
+        CameraShake.instance.Shake(0.5f);
+        if (OnKilled != null) OnKilled(this);
 
         GameObject.Destroy(gameObject);
     }

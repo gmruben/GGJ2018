@@ -32,6 +32,7 @@ public class Player2 : MonoBehaviour
 
     void Update()
     {
+ 
         if (Input.GetButton(JoyR))
         {
             transform.Rotate(Vector3.forward, -angularSpeed * Time.deltaTime);
