@@ -137,16 +137,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
-      time: 0.003921509
-      value: 1.0018959
-      inSlope: 0
-      outSlope: 0
+      time: 0.5558548
+      value: 1.0034409
+      inSlope: -0.10230799
+      outSlope: -0.10230799
       tangentMode: 0
     - serializedVersion: 2
-      time: 1
-      value: 0.013584137
-      inSlope: -0.3877172
-      outSlope: -0.3877172
+      time: 1.0025024
+      value: 0.0044898987
+      inSlope: -0.7692042
+      outSlope: -0.7692042
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxScale: 0
-  explosionTime: 5
+  explosionTime: 2.8
   renderer: {fileID: 212427499080559158}
   joinedAreaPrefab: {fileID: 1667586267750924, guid: 5fc8feeded666b34fb9bfe4f7ee3f0ca,
     type: 2}
@@ -171,26 +171,32 @@ MonoBehaviour:
   colour: 0
   hasCollided: 0
   linerenderer: {fileID: 114821238760911928}
-  LinePointPrefab: {fileID: 1051381785081580, guid: ae18120a01ba8a74199fd5f752f79b4e,
-    type: 2}
-  influencerate:
+  alpha_curve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.99871826
-      value: -0.0018348694
-      inSlope: -2.2083752
-      outSlope: -2.2083752
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  LinePointPrefab: {fileID: 1051381785081580, guid: ae18120a01ba8a74199fd5f752f79b4e,
+    type: 2}
+  influencerate:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &114821238760911928
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -203,7 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineSegmentSize: 0.3
-  lineWidth: 0.025
+  lineWidth: 0.1
   showGizmos: 1
   gizmoSize: 0.2
   gizmoColor: {r: 0, g: 1, b: 0.006896496, a: 0.5}
@@ -316,7 +322,7 @@ SpriteRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1507270843614862}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_MotionVectors: 1

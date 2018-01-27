@@ -23,6 +23,9 @@ public class Explosion : MonoBehaviour
 
     public CurvedLineRenderer linerenderer;
 
+    public AnimationCurve alpha_curve;
+
+    private Color color_init, color_noalpha, color_halfalpha;
     public GameObject LinePointPrefab;
     
     public AnimationCurve influencerate;
@@ -32,19 +35,26 @@ public class Explosion : MonoBehaviour
     {
         this.id = id;
         this.colour = colour;
+        this.counter = 0.0F;
 
-        Color c = GameUtil.GetColor(colour);
-        renderer.color = new Color(c.r, c.g, c.b, 0.5f);
+        color_init = GameUtil.GetColor(colour);
+        color_halfalpha = color_init;
+        color_halfalpha.a = 0.5F;
+        color_noalpha = color_init;
+        color_noalpha.a = 0.0F;
+        renderer.color = color_halfalpha;
 
         transform.localScale = Vector3.one * GameUtil.explosionRadius * 2;
-        // GenerateLinePoints(30);
 
-        linerenderer.line.SetColors(c, c);
+        linerenderer.line.SetColors(color_init, color_init);
     }
 
 	void Update ()
     {
         counter += Time.deltaTime;
+        Color current = Color.Lerp(color_init, color_noalpha, alpha_curve.Evaluate(counter/explosionTime));
+        renderer.color = Color.Lerp(color_halfalpha, color_noalpha, alpha_curve.Evaluate(counter/explosionTime));
+        linerenderer.line.SetColors(current, current);
         if (counter >= explosionTime)
         {
             Kill();
@@ -85,8 +95,6 @@ public class Explosion : MonoBehaviour
         if (OnDead != null) OnDead();
         GameObject.Destroy(gameObject);
     }
-
-
 }
 
 public enum WaveColour
