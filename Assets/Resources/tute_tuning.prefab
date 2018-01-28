@@ -81,12 +81,12 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 75
+    m_Font: {fileID: 12800000, guid: 18c56ae37e48f7e49aeee31d3c0ddcfc, type: 3}
+    m_FontSize: 105
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
-    m_MaxSize: 75
+    m_MaxSize: 105
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -148,7 +148,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 17, y: -82}
+  m_AnchoredPosition: {x: 17, y: -233}
   m_SizeDelta: {x: -1708, y: -873.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224615696344835836
@@ -166,8 +166,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 13, y: 170}
-  m_SizeDelta: {x: -1479.5, y: -791}
+  m_AnchoredPosition: {x: 22, y: -28}
+  m_SizeDelta: {x: -1112.5, y: -550.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224706544242210764
 RectTransform:

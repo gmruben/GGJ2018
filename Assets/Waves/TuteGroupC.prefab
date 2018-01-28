@@ -433,7 +433,7 @@ MonoBehaviour:
   enemyExplosionPrefab: {fileID: 1585895199412138, guid: a34e14c57235c4f45b379eba0289fa94,
     type: 2}
   renderer: {fileID: 212933672370897202}
-  colour: 4
+  colour: 0
 --- !u!114 &114408609275932974
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -448,7 +448,7 @@ MonoBehaviour:
   enemyExplosionPrefab: {fileID: 1585895199412138, guid: a34e14c57235c4f45b379eba0289fa94,
     type: 2}
   renderer: {fileID: 212540873339499678}
-  colour: 3
+  colour: 1
 --- !u!114 &114707891119298758
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -463,7 +463,7 @@ MonoBehaviour:
   enemyExplosionPrefab: {fileID: 1585895199412138, guid: a34e14c57235c4f45b379eba0289fa94,
     type: 2}
   renderer: {fileID: 212782127000210258}
-  colour: 3
+  colour: 1
 --- !u!114 &114790419476521858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -478,7 +478,7 @@ MonoBehaviour:
   enemyExplosionPrefab: {fileID: 1585895199412138, guid: a34e14c57235c4f45b379eba0289fa94,
     type: 2}
   renderer: {fileID: 212493025740563004}
-  colour: 4
+  colour: 0
 --- !u!135 &135213652201672490
 SphereCollider:
   m_ObjectHideFlags: 1

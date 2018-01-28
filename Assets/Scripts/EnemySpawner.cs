@@ -104,7 +104,6 @@ public class EnemySpawner : MonoBehaviour
         }
     }
     
-
     private void Spawn()
     {
         WaveColour colour = colours[UnityEngine.Random.Range(0, colours.Length)];
@@ -114,7 +113,7 @@ public class EnemySpawner : MonoBehaviour
         enemy.Init(colour, speed);
 
         enemy.transform.position = transform.position;
-        enemy.OnKilled += HandleOnEnemyKilled;
+        
 
         //spawnTime = UnityEngine.Random.Range(minSpawnTime, maxSpawnTime);
         counter = 0.0f;
@@ -124,7 +123,10 @@ public class EnemySpawner : MonoBehaviour
         transform.position = randpoint;
     }
 
-
+    public void AttachKill(Enemy e)
+    {
+        e.OnKilled += HandleOnEnemyKilled;
+    }
 
     private void HandleOnEnemyKilled (Enemy enemy, int combo)
     {

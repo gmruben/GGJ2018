@@ -718,7 +718,7 @@ MonoBehaviour:
   enemyExplosionPrefab: {fileID: 1585895199412138, guid: a34e14c57235c4f45b379eba0289fa94,
     type: 2}
   renderer: {fileID: 212858891887952686}
-  colour: 6
+  colour: 7
 --- !u!114 &114275586258342080
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -733,7 +733,7 @@ MonoBehaviour:
   enemyExplosionPrefab: {fileID: 1585895199412138, guid: a34e14c57235c4f45b379eba0289fa94,
     type: 2}
   renderer: {fileID: 212933672370897202}
-  colour: 6
+  colour: 7
 --- !u!114 &114707891119298758
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -748,7 +748,7 @@ MonoBehaviour:
   enemyExplosionPrefab: {fileID: 1585895199412138, guid: a34e14c57235c4f45b379eba0289fa94,
     type: 2}
   renderer: {fileID: 212782127000210258}
-  colour: 6
+  colour: 7
 --- !u!114 &114775723859076574
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -763,7 +763,7 @@ MonoBehaviour:
   enemyExplosionPrefab: {fileID: 1585895199412138, guid: a34e14c57235c4f45b379eba0289fa94,
     type: 2}
   renderer: {fileID: 212307135121342290}
-  colour: 6
+  colour: 7
 --- !u!114 &114790419476521858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -778,7 +778,7 @@ MonoBehaviour:
   enemyExplosionPrefab: {fileID: 1585895199412138, guid: a34e14c57235c4f45b379eba0289fa94,
     type: 2}
   renderer: {fileID: 212493025740563004}
-  colour: 6
+  colour: 7
 --- !u!114 &114919547219253506
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -793,7 +793,7 @@ MonoBehaviour:
   enemyExplosionPrefab: {fileID: 1585895199412138, guid: a34e14c57235c4f45b379eba0289fa94,
     type: 2}
   renderer: {fileID: 212692512758932390}
-  colour: 6
+  colour: 7
 --- !u!114 &114982186666948922
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -808,7 +808,7 @@ MonoBehaviour:
   enemyExplosionPrefab: {fileID: 1585895199412138, guid: a34e14c57235c4f45b379eba0289fa94,
     type: 2}
   renderer: {fileID: 212194883944597170}
-  colour: 6
+  colour: 7
 --- !u!135 &135111219661700898
 SphereCollider:
   m_ObjectHideFlags: 1

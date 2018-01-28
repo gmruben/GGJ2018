@@ -57,7 +57,8 @@ public class OverlayHUD : MonoBehaviour
         {
             group.alpha = overlay_fadein.Evaluate(i / 0.45F);
             yield return null;
-        }
+        }  
+         if (o.lifetime > 0.0F) yield return new WaitForSeconds(o.lifetime);
         
         if (o.WaitForInput != string.Empty)
         {
@@ -65,7 +66,8 @@ public class OverlayHUD : MonoBehaviour
             if(o.WaitForInput == "any") while(!Input.anyKeyDown) yield return null;
             else while (!Input.GetButtonDown(o.WaitForInput) && Input.GetAxis(o.WaitForInput) == 0.0F) yield return null;
         }
-        else if (o.lifetime > 0.0F) yield return new WaitForSeconds(o.lifetime);
+        
+       
 
         for (float i = 0; i < 0.45F; i += Time.deltaTime)
         {

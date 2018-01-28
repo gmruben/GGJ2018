@@ -20,7 +20,6 @@ public class Game : MonoBehaviour
     private bool isGameOver;
 
 
-    
     void Awake()
     {
         instance = this;

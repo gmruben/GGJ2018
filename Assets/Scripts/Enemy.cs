@@ -24,6 +24,8 @@ public class Enemy : MonoBehaviour
 
         renderer.color = GameUtil.GetColor(colour);
         radius = GetComponent<SphereCollider>().radius;
+
+        EnemySpawner.instance.AttachKill(this);
     }
 
     void Update ()

@@ -196,8 +196,8 @@ MonoBehaviour:
     lifetime: 2
     WaitForInput: RB1
   - name: tute_tuning
-    lifetime: 2.5
-    WaitForInput: StickRY1
+    lifetime: 7
+    WaitForInput: 
   - name: title
     lifetime: 2.5
     WaitForInput: any

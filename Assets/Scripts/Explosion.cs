@@ -106,6 +106,12 @@ public class Explosion : MonoBehaviour
                 other.GetComponent<Bullet>().Desintegrate();
             }
         }
+        else if(other.tag == "Enemy")
+        {
+            Enemy enemy = other.GetComponent<Enemy>();
+            if(enemy.colour == WaveColour.White) enemy.Kill(1);
+            else if(enemy.colour == colour) enemy.Kill(1);
+        }
     }
 
     public List<Vector3> GetIntersectionPoints(Vector3 point_a, Vector3 point_b)
@@ -115,7 +121,6 @@ public class Explosion : MonoBehaviour
 
         WavePoint a = linepoints.OrderBy(p => Vector3.Distance(p.initialpoint, point_a)).First();
         WavePoint b = linepoints.OrderBy(p => Vector3.Distance(p.initialpoint, point_b)).First();
-        Debug.Log(a);
         int startindex = linepoints.IndexOf(a);
         int endindex = linepoints.IndexOf(b);
 
@@ -222,6 +227,8 @@ public enum WaveColour
     Purple,
     Green,
     Orange,
+
+    White,
 
     None
 }
