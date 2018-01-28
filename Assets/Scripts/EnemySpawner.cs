@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public static EnemySpawner instance;
-    void Awake(){instance = this;}
+    void Awake() { instance = this; }
     public event Action<Enemy, int> OnEnemyKilled;
 
     public GameObject[] enemyPrefabs;
@@ -30,10 +30,10 @@ public class EnemySpawner : MonoBehaviour
     private bool spawnEnemies;
     private int wavenum = 0;
     public EnemyWave targetwave;
-   /* void Awake()
-    {
-        //Spawn();
-    }*/
+    /* void Awake()
+     {
+         //Spawn();
+     }*/
 
     void Update()
     {
@@ -49,21 +49,33 @@ public class EnemySpawner : MonoBehaviour
             direction = -direction;
         }
 */
-
-        if(targetwave != null)
+        if (wavenum < tutewaves.Count && targetwave != null)
         {
-            if(targetwave.complete)
+            if (Input.GetButtonDown("Back1") || Input.GetButtonDown("Back2"))
+            {
+                wavenum = tutewaves.Count;
+                targetwave.End();
+                targetwave = null;
+                spawnEnemies = true;
+            }
+        }
+
+        if (targetwave != null)
+        {
+            if (targetwave.complete)
             {
                 Debug.Log("changing targetwave");
-                 wavenum ++;
-                if(wavenum < tutewaves.Count)
+                wavenum++;
+                targetwave.End();
+                if (wavenum < tutewaves.Count)
                 {
                     targetwave = tutewaves[wavenum];
                     StartWave(targetwave);
                 }
                 else
                 {
-                    GetRandomWave();
+                    targetwave = null;
+                    spawnEnemies = true;
                 }
             }
         }
@@ -90,20 +102,20 @@ public class EnemySpawner : MonoBehaviour
         targetwave = tutewaves[wavenum];
         StartWave(targetwave);
     }
-    
+
 
     public void StartWave(EnemyWave w)
     {
         w.StartWave();
-        if (w.SpawnEnemyRateMin > 0.0F)
+        /*if (w.SpawnEnemyRateMin > 0.0F)
         {
             spawnEnemies = true;
             spawnTime = UnityEngine.Random.Range(w.SpawnEnemyRateMin, w.SpawnEnemyRateMax);
             counter = 0.0F;
             //for(int i = 0; i < w.SpawnRandomEnemies; i++) Spawn();
-        }
+        }*/
     }
-    
+
     private void Spawn()
     {
         WaveColour colour = colours[UnityEngine.Random.Range(0, colours.Length)];
@@ -113,9 +125,7 @@ public class EnemySpawner : MonoBehaviour
         enemy.Init(colour, speed);
 
         enemy.transform.position = transform.position;
-        
-
-        //spawnTime = UnityEngine.Random.Range(minSpawnTime, maxSpawnTime);
+        spawnTime = UnityEngine.Random.Range(minSpawnTime/GameUtil.TimeFactor, maxSpawnTime/GameUtil.TimeFactor);
         counter = 0.0f;
 
         Vector3 randpoint = transform.position;
@@ -128,9 +138,9 @@ public class EnemySpawner : MonoBehaviour
         e.OnKilled += HandleOnEnemyKilled;
     }
 
-    private void HandleOnEnemyKilled (Enemy enemy, int combo)
+    private void HandleOnEnemyKilled(Enemy enemy, int combo)
     {
         enemy.OnKilled -= HandleOnEnemyKilled;
-        if (OnEnemyKilled != null) OnEnemyKilled (enemy, combo);
+        if (OnEnemyKilled != null) OnEnemyKilled(enemy, combo);
     }
 }

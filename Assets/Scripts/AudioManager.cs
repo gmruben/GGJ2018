@@ -33,7 +33,7 @@ public class AudioManager : MonoBehaviour {
 
 	static IEnumerator PlayOnAudioSource(AudioClipContainer a, AudioSource source)
 	{
-		Debug.Log("queued playing audio clip " + a.name + " on source " + source);
+		//Debug.Log("queued playing audio clip " + a.name + " on source " + source);
 		//while(source.isPlaying && a.wait_for_playtime) 
 		//{
 		//	yield return null;

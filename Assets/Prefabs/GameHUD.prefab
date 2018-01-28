@@ -184,20 +184,20 @@ MonoBehaviour:
   overlay_test: 
   overlays:
   - name: tute_aiming
-    lifetime: 7
-    WaitForInput: 
+    lifetime: 5
+    WaitForInput: any
   - name: tute_collab
-    lifetime: 7
-    WaitForInput: 
+    lifetime: 5
+    WaitForInput: any
   - name: tute_matching
     lifetime: 7
     WaitForInput: 
   - name: tute_shooting
-    lifetime: 2
-    WaitForInput: RB1
+    lifetime: 5
+    WaitForInput: any
   - name: tute_tuning
-    lifetime: 7
-    WaitForInput: 
+    lifetime: 5
+    WaitForInput: any
   - name: title
     lifetime: 2.5
     WaitForInput: any

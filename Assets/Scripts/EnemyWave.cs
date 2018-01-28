@@ -13,6 +13,7 @@ public class EnemyWave : MonoBehaviour
     public float SpawnEnemyRateMin = 0.0F, SpawnEnemyRateMax = 0.0F;
 
     public bool complete = false;
+    GameObject grouptarg;
     // Use this for initialization
     void Start()
     {
@@ -37,7 +38,7 @@ public class EnemyWave : MonoBehaviour
 
         while (current < groups.Count)
         {
-            GameObject grouptarg = Instantiate(groups[current].GroupPrefab);
+            grouptarg = Instantiate(groups[current].GroupPrefab);
             grouptarg.transform.position = this.transform.position + Vector3.left * Random.Range(-GameUtil.ScreenXRange, GameUtil.ScreenXRange);
             List<Enemy> spawnedenemies = new List<Enemy>();
             foreach (Enemy e in grouptarg.GetComponentsInChildren<Enemy>())
@@ -96,7 +97,14 @@ public class EnemyWave : MonoBehaviour
             current++;
         }
         complete = true;
+        End();
+    }
 
+    public void End()
+    {
+        if(grouptarg != null) Destroy(grouptarg);
+        if(OverlayMessage != string.Empty) OverlayHUD.instance.EndOverlay();
+        StopAllCoroutines();
     }
 
     void OnDrawGizmos()

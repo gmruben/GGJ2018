@@ -22,7 +22,7 @@ public class Player2 : MonoBehaviour
     public float angularSpeed = 50;
     
     public MeshRenderer renderer;
-    public SpriteRenderer line;
+    public SpriteRenderer line, lilcircle;
     
     private Bullet currentBullet;
 
@@ -71,6 +71,7 @@ public class Player2 : MonoBehaviour
         {
             colorArrow.rotation = Quaternion.FromToRotation(Vector3.up, colorVector);
         }
+        UpdateColour();
     }
 
     public WaveColour CurrentColour
@@ -87,7 +88,8 @@ public class Player2 : MonoBehaviour
 
     private void UpdateColour ()
     {
-        renderer.material.SetColor("_Color", GameUtil.GetColor(CurrentColour));
+        lilcircle.color= GameUtil.GetColor(CurrentColour);
+        //renderer.material.SetColor("_Color", );
         line.color = GameUtil.GetColor(CurrentColour);
     }
 }

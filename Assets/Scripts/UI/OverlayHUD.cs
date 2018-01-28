@@ -15,6 +15,7 @@ public class OverlayHUD : MonoBehaviour
 
     public bool overlay_showing;
 
+    private bool end_immediate = false;
     void Awake() { instance = this; }
     // Use this for initialization
     void Start()
@@ -45,8 +46,13 @@ public class OverlayHUD : MonoBehaviour
 
     IEnumerator LoadOverlayRoutine(Overlay o)
     {
-        while(overlay_showing) yield return null;
+        while(overlay_showing) 
+        {
+            end_immediate = true;
+            yield return null;
+        }
         overlay_showing = true;
+        end_immediate = false;
         GameObject obj = Instantiate(Resources.Load<GameObject>(o.name));
         obj.transform.SetParent(_canvas.transform, true);
         (obj.transform as RectTransform).sizeDelta = Vector3.zero;
@@ -62,13 +68,12 @@ public class OverlayHUD : MonoBehaviour
         
         if (o.WaitForInput != string.Empty)
         {
+            if(o.WaitForInput == "any") while(!Input.anyKeyDown && !end_immediate) yield return null;
+            else while (!Input.GetButtonDown(o.WaitForInput) && Input.GetAxis(o.WaitForInput) == 0.0F && !end_immediate) yield return null;
 
-            if(o.WaitForInput == "any") while(!Input.anyKeyDown) yield return null;
-            else while (!Input.GetButtonDown(o.WaitForInput) && Input.GetAxis(o.WaitForInput) == 0.0F) yield return null;
+            
         }
         
-       
-
         for (float i = 0; i < 0.45F; i += Time.deltaTime)
         {
             group.alpha = overlay_fadeout.Evaluate(i / 0.45F);
@@ -78,5 +83,11 @@ public class OverlayHUD : MonoBehaviour
         Destroy(obj);
         overlay_showing = false;
 
+    }
+
+    public void EndOverlay()
+    {
+        end_immediate = true;
+        //StopAllCoroutines();
     }
 }

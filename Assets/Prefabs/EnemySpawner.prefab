@@ -566,8 +566,8 @@ MonoBehaviour:
   - {fileID: 1624319413451382, guid: 5c9597b4460c5cf48aecf10a0daea0a1, type: 2}
   - {fileID: 1624319413451382, guid: f09706d49ba1ce84e8574f78ed5d2d7c, type: 2}
   maxPosX: 6
-  minSpawnTime: 5
-  maxSpawnTime: 10
+  minSpawnTime: 4
+  maxSpawnTime: 9
   minEnemySpeed: 0.1
   maxEnemySpeed: 0.5
   colours: 030000000400000005000000

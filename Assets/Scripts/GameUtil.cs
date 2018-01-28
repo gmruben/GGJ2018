@@ -48,15 +48,25 @@ public static class GameUtil
     {
         get
         {
-                int rand = Random.Range(0, 3);
-                switch (rand)
-                {
-                    case 0: return WaveColour.Green;
-                    case 1: return WaveColour.Purple;
-                    case 2: return WaveColour.Orange;
-                }
+            int rand = Random.Range(0, 3);
+            switch (rand)
+            {
+                case 0: return WaveColour.Green;
+                case 1: return WaveColour.Purple;
+                case 2: return WaveColour.Orange;
+            }
             return WaveColour.Green;
         }
+    }
+
+    private static float timefactor_min = 1.0F, timefactor_max = 2.5F;
+    private static float timefactor_current = 0.0F;
+    public static float TimeFactor
+    {
+        get{
+            timefactor_current = Mathf.Clamp(timefactor_current + (Time.deltaTime / 5), timefactor_min, timefactor_max);
+            return timefactor_current;
+            }
     }
 
     private static float minSpeed = 0.5F, maxSpeed = 1.5F;
