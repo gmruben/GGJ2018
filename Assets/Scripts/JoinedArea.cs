@@ -13,6 +13,8 @@ public class JoinedArea : MonoBehaviour
     public WaveColour colour;
     private int numKilledEnemies;
 
+    float numSteps = 100;
+
     public void Init (Explosion e1, Explosion e2)
     {
         this.e1 = e1;
@@ -36,15 +38,36 @@ public class JoinedArea : MonoBehaviour
             float d2 = (other.transform.position - pos2).sqrMagnitude;
 
             Enemy enemy = other.GetComponent<Enemy>();
-            if (d1 <= GameUtil.ExplosionRadiusSquared && d2 <= GameUtil.ExplosionRadiusSquared)
+            if (CheckIsPointInArea(enemy.transform.position))
             {
-                if (enemy.colour == colour)
+                CheckKillEnemy(enemy);
+            }
+            else
+            {
+                float step = (Mathf.PI * 2) / numSteps;
+                for (int i = 0; i < numSteps; i++)
                 {
-                    numKilledEnemies++;
-                    enemy.Kill(numKilledEnemies);
+                    float angle = i * step * Mathf.Rad2Deg;
+
+                    Vector3 vector = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.up;
+                    Vector3 point = enemy.transform.position + vector.normalized * enemy.radius;
+
+                    if (CheckIsPointInArea(point))
+                    {
+                        CheckKillEnemy(enemy);
+                        break;
+                    }
                 }
             }
         }
+    }
+
+    private bool CheckIsPointInArea (Vector3 point)
+    {
+        float d1 = (point - pos1).sqrMagnitude;
+        float d2 = (point - pos2).sqrMagnitude;
+
+        return (d1 <= GameUtil.ExplosionRadiusSquared && d2 <= GameUtil.ExplosionRadiusSquared);
     }
 
     private void HandleOnExplosionDead ()
@@ -53,5 +76,14 @@ public class JoinedArea : MonoBehaviour
         e2.OnDead -= HandleOnExplosionDead;
 
         GameObject.Destroy(gameObject);
+    }
+
+    private void CheckKillEnemy (Enemy enemy)
+    {
+        if (enemy.colour == colour)
+        {
+            numKilledEnemies++;
+            enemy.Kill(numKilledEnemies);
+        }
     }
 }

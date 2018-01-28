@@ -11,6 +11,8 @@ public class BottomCollider : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
+            AudioManager.PlaySFX("EnemyLands");
+
             GameObject explosion = GameObject.Instantiate(particleSystemPrefab);
             explosion.transform.position = other.transform.position;
 

@@ -30,12 +30,14 @@ public class Enemy : MonoBehaviour
 
     void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.K)) Kill(2);
+        //if (Input.GetKeyDown(KeyCode.K)) Kill(2);
         transform.position -= Vector3.up * speed * Time.deltaTime;
 	}
     
     public void Kill (int combo)
     {
+        AudioManager.PlaySFX("EnemyDies");
+
         ParticleSystemRenderer explosion = GameObject.Instantiate(enemyExplosionPrefab).GetComponent<ParticleSystemRenderer>();
         explosion.transform.position = transform.position;
 

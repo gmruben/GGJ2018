@@ -33,6 +33,7 @@ public class GameHUD : MonoBehaviour
         score = score + 1 + ((combo - 1) * 5);
         UpdateLabel();
 
+        Debug.Log("COMBO: " + combo);
         if (combo > 1)
         {
             ComboFader comboFader = GameObject.Instantiate(comboLabelPrefab).GetComponent<ComboFader>();
