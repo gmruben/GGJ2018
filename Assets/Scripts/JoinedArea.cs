@@ -52,7 +52,7 @@ public class JoinedArea : MonoBehaviour
                     Vector3 vector = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.up;
                     Vector3 point = enemy.transform.position + vector.normalized * enemy.radius;
 
-                    if (CheckIsPointInArea(enemy.transform.position))
+                    if (CheckIsPointInArea(point))
                     {
                         CheckKillEnemy(enemy);
                         break;
