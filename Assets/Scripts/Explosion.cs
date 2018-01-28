@@ -43,7 +43,7 @@ public class Explosion : MonoBehaviour
         color_halfalpha = color_init;
         color_halfalpha.a = 0.5F;
         color_noalpha = color_init;
-        color_noalpha.a = 0.0F;
+        color_noalpha.a = 0.25F;
         renderer.color = color_halfalpha;
 
         transform.localScale = Vector3.one * GameUtil.explosionRadius * 2;
@@ -54,8 +54,10 @@ public class Explosion : MonoBehaviour
     void Update()
     {
         counter += Time.deltaTime;
-        Color current = Color.Lerp(color_init, color_noalpha, alpha_curve.Evaluate(counter / explosionTime));
-        renderer.color = Color.Lerp(color_halfalpha, color_noalpha, alpha_curve.Evaluate(counter / explosionTime));
+        float norm = counter / explosionTime;
+
+        Color current = Color.Lerp(color_init, color_noalpha, alpha_curve.Evaluate(norm));
+        renderer.color = Color.Lerp(color_halfalpha, color_noalpha, alpha_curve.Evaluate(norm));
         linerenderer.line.SetColors(current, current);
 
         if (counter >= explosionTime)
