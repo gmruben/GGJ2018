@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour
 
     void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.K)) Kill(2);
+        //if (Input.GetKeyDown(KeyCode.K)) Kill(2);
         transform.position -= Vector3.up * speed * Time.deltaTime;
 	}
     
